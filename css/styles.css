@@ -1,0 +1,29 @@
+/* Base styles for SoléAA */
+:root{
+--primary:#0d6efd;
+--muted:#6c757d;
+}
+
+
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#f8f9fa}
+
+
+.navbar-brand{font-weight:700;letter-spacing:0.6px}
+
+
+.hero{background-image:linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1606813907291-27f8b8d2a76c'); background-size:cover; background-position:center; height:60vh; color:#fff; display:flex; align-items:center}
+
+
+.product-card{background:#fff; border-radius:8px; box-shadow:0 6px 18px rgba(15,15,15,0.06)}
+.product-card img{border-radius:8px; object-fit:cover; height:180px}
+.product-title{font-weight:600}
+
+
+.brand-card{background:#fff; border-radius:8px; box-shadow:0 6px 18px rgba(15,15,15,0.05)}
+
+
+.category-card{background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(15,15,15,0.05); text-align:center}
+
+
+/* responsive tweaks */
+@media (max-width:576px){ .hero{height:40vh} .product-card img{height:140px} }
