@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – SoléAA</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+<!-- ====================== NAVBAR ====================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+
+    <!-- BRAND -->
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">
+      SoléAA
+    </div>
+
+    <!-- NAVBAR LINKS -->
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <!-- RIGHT OPTIONS -->
+    <div class="flex items-center gap-6 text-white">
+
+      <!-- SEARCH -->
+      <input type="text" placeholder="Search…" 
+             class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+
+      <!-- LOGIN -->
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+
+      <!-- CART -->
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<!-- ====================== CONTACT US SECTION ====================== -->
+<section class="container mx-auto px-6 py-12">
+
+  <h1 class="text-4xl font-bold mb-6">Contact Us</h1>
+
+  <div class="space-y-6 text-lg">
+
+    <!-- CUSTOMER SERVICE -->
+    <p class="font-semibold underline">Customer Service</p>
+
+    <!-- HOURS -->
+    <p>
+      <span class="font-semibold">Operating Hours:</span><br>
+      9:00 AM – 6:00 PM (Mondays to Fridays, except Public Holidays)
+    </p>
+
+    <!-- PHONE -->
+    <p>
+      <span class="font-semibold">Phone:</span><br>
+      +603 14270855
+    </p>
+
+    <!-- EMAIL -->
+    <p>
+      <span class="font-semibold">Email:</span><br>
+      <a href="mailto:services@soleaa.com" class="text-blue-600 underline">
+        services@soleaa.com
+      </a>
+    </p>
+
+  </div>
+
+</section>
+
+<!-- ====================== FAQ SECTION (Simple Clean) ====================== -->
+<section class="container mx-auto px-6 pb-12">
+
+  <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+
+  <div class="space-y-6 text-lg">
+
+    <div>
+      <p class="font-semibold">1. How can I track my order?</p>
+      <p>You can track your order through the Dashboard under "My Orders".</p>
+    </div>
+
+    <div>
+      <p class="font-semibold">2. What is the return policy?</p>
+      <p>Items can be returned within 14 days in original condition with the receipt.</p>
+    </div>
+
+    <div>
+      <p class="font-semibold">3. Do you offer free shipping?</p>
+      <p>Yes, we offer free shipping for purchases above RM200.</p>
+    </div>
+
+    <div>
+      <p class="font-semibold">4. How can I contact support?</p>
+      <p>You may reach us via email at services@soleaa.com.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ====================== CONTACT FORM (Simple) ====================== -->
+<section class="container mx-auto px-6 pb-16">
+
+  <h2 class="text-3xl font-bold mb-6">Send Us a Message</h2>
+
+  <form class="space-y-4 max-w-xl">
+
+    <!-- NAME -->
+    <div>
+      <label class="font-semibold">Name</label>
+      <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your Name">
+    </div>
+
+    <!-- EMAIL -->
+    <div>
+      <label class="font-semibold">Email</label>
+      <input type="email" class="w-full p-3 border rounded-lg" placeholder="Your Email">
+    </div>
+
+    <!-- MESSAGE -->
+    <div>
+      <label class="font-semibold">Message</label>
+      <textarea class="w-full p-3 border rounded-lg" rows="5" placeholder="Your Message"></textarea>
+    </div>
+
+    <!-- BUTTON -->
+    <button type="submit" 
+            class="px-6 py-3 bg-black text-white rounded-lg hover:bg-yellow-500 hover:text-black transition">
+      Send Message
+    </button>
+
+  </form>
+
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="bg-black text-gray-300 py-10">
+  <div class="container mx-auto px-6 text-sm">
+    © 2025 SoléAA. All rights reserved.
+  </div>
+</footer>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>

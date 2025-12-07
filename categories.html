@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories – SoléAA</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  .active-filter {
+    background-color: black !important;
+    color: yellow !important;
+  }
+</style>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans"></body>
+
+<!-- ====================== NAVBAR ====================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</div>
+
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-6 text-white">
+      <input id="searchBar" type="text" placeholder="Search…" class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+    <button onclick="searchProduct()" class="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+    Search
+    </button>
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== PAGE TITLE ====================== -->
+<section class="w-full h-[300px] bg-black flex items-center justify-center text-yellow-400">
+  <h1 class="text-6xl font-extrabold tracking-tight">Categories</h1>
+</section>
+
+<!-- ====================== CATEGORY FILTER BUTTONS ====================== -->
+ <section class="container mx-auto px-6 py-10">
+  <h1 class="text-4xl font-bold mb-6">Shop by Categories</h1>
+  <p class="text-gray-600">Choose a category to explore shoes based on your lifestyle.</p>
+</section>
+  <section class="container mx-auto px-6">
+  <div class="flex flex-wrap gap-4 mb-10">
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition active-filter"
+            onclick="filterCategory('all')">All</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('sneakers')">Sneakers</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('tennis')">Tennis Shoes</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('running')">Running Shoes</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('lifestyle')">Lifestyle</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('gym')">Gym/Training Shoes</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('basketball')">Basketball</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('sandals')">Sandals</button>
+
+  </div>
+</section>
+
+<!-- ====================== PRODUCT GRID ====================== -->
+<section class="container mx-auto px-6 pb-16 grid grid-cols-2 md:grid-cols-4 gap-8" id="categoryGrid">
+
+  <!-- Sneakers -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Bella Lea Sneakers Women',379, 'img1/Bella Lea Sneakers Women.avif')">
+     <img src="img1/Bella Lea Sneakers Women.avif" />
+     <h3 class="font-semibold">Bella Lea Sneakers Women</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Milenio Tech sneakers Unisex',339, 'img1/Milenio Tech Sneakers Unisex.avif')">
+     <img src="img1/Milenio Tech Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Milenio Tech sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 339</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('New Balance 204L',499, 'img1/New Balance 204L.avif')">
+     <img src="img1/New Balance 204L.avif" />
+     <h3 class="font-semibold">New Balance 204L</h3>
+     <p class="font-bold mt-2">RM 499</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Nike Air force 107 LV8',539, 'img1/Nike Air Force 107 LV8.avif')">
+     <img src="img1/Nike Air Force 1 '07 LV8.avif" />
+     <h3 class="font-semibold">Nike Air force 107 LV8</h3>
+     <p class="font-bold mt-2">RM 539</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Palermo Premium Sneakers Unisex',469, 'img1/Palermo Premium Sneakers Unisex.avif')">
+     <img src="img1/Palermo Premium Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Palermo Premium Sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 469</p>
+</div>
+  
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Palermo sneakers Unisex',429, 'img1/Palermo Sneakers Unisex.avif')">
+     <img src="img1/Palermo Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Palermo sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 429</p>
+</div>
+   
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Speedcat Lux Ballet Sneakers Women',399, 'img1/Speedcat Lux Ballet Sneakers Women.avif')">
+     <img src="img1/Speedcat Lux Ballet Sneakers Women.avif" />
+     <h3 class="font-semibold">Speedcat Lux Ballet Sneakers Women</h3>
+     <p class="font-bold mt-2">RM 399</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sneakers"
+     onclick="openProduct('Speedcat Lux Sneakers Unisex',579, 'img1/Speedcat Lux Sneakers Unisex.avif')">
+     <img src="img1/Speedcat Lux Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Speedcat Lux Sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+  <!-- Tennis Shoes -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-RESOLUTION X GS',369, 'img1/GEL-RESOLUTION X GS.webp')">
+     <img src="img1/GEL-RESOLUTION X GS.webp" />
+     <h3 class="font-semibold">GEL-RESOLUTION X GS</h3>
+     <p class="font-bold mt-2">RM 369</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GAME FF',369, 'img1/GAME FF.webp')">
+     <img src="img1/GAME FF.webp" />
+     <h3 class="font-semibold">GAME FF</h3>
+     <p class="font-bold mt-2">RM 369</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-RESOLUTION X',629, 'img1/GEL-RESOLUTION X.webp')">
+     <img src="img1/GEL-RESOLUTION X.webp" />
+     <h3 class="font-semibold">GEL-RESOLUTION X PINK</h3>
+     <p class="font-bold mt-2">RM 629</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('COURT FF 3 WHITE',559, 'img1/COURT FF 3.avif')">
+     <img src="img1/COURT FF 3.avif" />
+     <h3 class="font-semibold">COURT FF 3 WHITE</h3>
+     <p class="font-bold mt-2">RM 559</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GAME FFF WHITE',369, 'img1/GAME FF WHITE.avif')">
+     <img src="img1/GAME FF WHITE.avif" />
+     <h3 class="font-semibold">GAME FFF WHITE</h3>
+     <p class="font-bold mt-2">RM 369</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GAME FF GREY',369, 'img1/GAME FF GREY.avif')">
+     <img src="img1/GAME FF GREY.avif" />
+     <h3 class="font-semibold">GAME FF GREY</h3>
+     <p class="font-bold mt-2">RM 369</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-CHALLENGE R 15',479, 'img1/GAME FF GREY.avif')">
+     <img src="img1/GEL-CHALLENGER 15.avif" />
+     <h3 class="font-semibold">GEL-CHALLENGER 15</h3>
+     <p class="font-bold mt-2">RM 479</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-DEDICATE 8',329, 'img1/GEL-DEDICATE 8.avif')">
+     <img src="img1/GEL-DEDICATE 8.avif" />
+     <h3 class="font-semibold">GEL-DEDICATE 8</h3>
+     <p class="font-bold mt-2">RM 329</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-RESOLUTION X',629, 'img1/GEL-RESOLUTION X.avif')">
+     <img src="img1/GEL-RESOLUTION X.avif" />
+     <h3 class="font-semibold">GEL-RESOLUTION X</h3>
+     <p class="font-bold mt-2">RM 629</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('GEL-RESOLUTION X NIGHT ENERGY',659, 'img1/GEL-RESOLUTION X NIGHT ENERGY.avif')">
+     <img src="img1/GEL-RESOLUTION X NIGHT ENERGY.avif" />
+     <h3 class="font-semibold">GEL-RESOLUTION X NIGHT ENERGY</h3>
+     <p class="font-bold mt-2">RM 659</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('SOLUTION SPEED FF 3',579, 'img1/SOLUTION SPEED FF 3.avif')">
+     <img src="img1/SOLUTION SPEED FF 3.avif" />
+     <h3 class="font-semibold">SOLUTION SPEED FF 3</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="tennis"
+     onclick="openProduct('SOLUTION SPEED FF 3 YELLOW',579, 'img1/SOLUTION SPEED FF 3 YELLOW.webp')">
+     <img src="img1/SOLUTION SPEED FF 3 YELLOW.webp" />
+     <h3 class="font-semibold">SOLUTION SPEED FF 3 YELLOW</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+  <!-- Running Shoes -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE PEGASUS PREMIUM',995, 'img1/NIKE PEGASUS PREMIUM.avif')">
+     <img src="img1/NIKE PEGASUS PREMIUM.avif" />
+     <h3 class="font-semibold">NIKE PEGASUS PREMIUM</h3>
+     <p class="font-bold mt-2">RM 995</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE VOMERO PREMIUM',1029, 'img1/NIKE VOMERO PREMIUM.avif')">
+     <img src="img1/NIKE VOMERO PREMIUM.avif" />
+     <h3 class="font-semibold">NIKE VOMERO PREMIUM</h3>
+     <p class="font-bold mt-2">RM 1,029</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE VOMERO PLUS',759, 'img1/NIKE VOMERO PLUS.avif')">
+     <img src="img1/NIKE VOMERO PLUS.avif" />
+     <h3 class="font-semibold">NIKE VOMERO PLUS</h3>
+     <p class="font-bold mt-2">RM 759</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE STRUCTURE',609, 'img1/NIKE STRUCTURE 26.avif')">
+     <img src="img1/NIKE STRUCTURE 26.avif" />
+     <h3 class="font-semibold">NIKE STRUCTURE 26</h3>
+     <p class="font-bold mt-2">RM 609</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('District Vision x New Balance SC Elite V5',1099, 'img1/District Vision x New Balance SC Elite V5.webp')">
+     <img src="img1/District Vision x New Balance SC Elite V5.webp" />
+     <h3 class="font-semibold">District Vision x New Balance SC Elite V5</h3>
+     <p class="font-bold mt-2">RM 1,099</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('Fresh Foam X 1080v14',629, 'img1/Fresh Foam X 1080v14.webp')">
+     <img src="img1/Fresh Foam X 1080v14.webp" />
+     <h3 class="font-semibold">Fresh Foam X 1080v14</h3>
+     <p class="font-bold mt-2">RM 629</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NAVABLAST 5',479, 'img1/NOVABLAST 5.webp')">
+     <img src="img1/NOVABLAST 5.webp" />
+     <h3 class="font-semibold">NOVABLAST 5</h3>
+     <p class="font-bold mt-2">RM 479</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NOOSA TRI 16',479, 'img1/NOOSA TRI 16.webp')">
+     <img src="img1/NOOSA TRI 16.webp" />
+     <h3 class="font-semibold">NOOSA TRI 16</h3>
+     <p class="font-bold mt-2">RM 440</p>
+</div>
+
+  <!-- Lifestyle Shoes -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 SD PINK',880, 'img1/MEXICO 66 SD PINK.webp')">
+     <img src="img1/MEXICO 66 SD PINK.webp" />
+     <h3 class="font-semibold">MEXICO 66 SD PINK</h3>
+     <p class="font-bold mt-2">RM 880</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 SD RED',880, 'img1/MEXICO 66 SD RED.webp')">
+     <img src="img1/MEXICO 66 SD RED.webp" />
+     <h3 class="font-semibold">MEXICO 66 SD RED</h3>
+     <p class="font-bold mt-2">RM 880</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 TGRS BLACK',760, 'img1/MEXICO 66 TGRS BLACK.webp')">
+     <img src="img1/MEXICO 66 TGRS BLACK.webp" />
+     <h3 class="font-semibold">MEXICO 66 TGRS BLACK</h3>
+     <p class="font-bold mt-2">RM 760</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 TGRS PINK',760, 'img1/MEXICO 66 TGRS PINK.webp')">
+     <img src="img1/MEXICO 66 TGRS PINK.webp" />
+     <h3 class="font-semibold">MEXICO 66 TGRS PINK</h3>
+     <p class="font-bold mt-2">RM 760</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('SPEEDCAT LUX BALLET SNEAKERS WOMEN',399, 'img1/Speedcat Lux Ballet Sneakers Women.avif')">
+     <img src="img1/Speedcat Lux Ballet Sneakers Women.avif" />
+     <h3 class="font-semibold">SPEEDCAT LUX BALLET SNEAKERS WOMEN</h3>
+     <p class="font-bold mt-2">RM 399</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('SPEEDCAT LUX SNEAKERS UNISEX',579, 'img1/Speedcat Lux Sneakers Unisex.avif')">
+     <img src="img1/Speedcat Lux Sneakers Unisex.avif" />
+     <h3 class="font-semibold">SPEEDCAT LUX SNEAKERS UNISEX</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('SPEEDCAT BALLET SHOES WOMEN',379, 'img1/Speedcat-Ballet-Shoes-Women.avif')">
+     <img src="img1/Speedcat-Ballet-Shoes-Women.avif" />
+     <h3 class="font-semibold">SPEEDCAT BALLET SHOES WOMEN</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('SPEEDCAT PREMIUM SNEAKERS UNISEX',749, 'img1/Speedcat-Premium-Sneakers-Unisex.avif')">
+     <img src="img1/Speedcat-Premium-Sneakers-Unisex.avif" />
+     <h3 class="font-semibold">SPEEDCAT PREMIUM SNEAKERS UNISEX</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+  <!-- Gym/Training Shoes -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('NIKE METCON 10',689, 'img1/M+NIKE+METCON+10.avif')">
+     <img src="img1/M+NIKE+METCON+10.avif" />
+     <h3 class="font-semibold">NIKE METCON 10</h3>
+     <p class="font-bold mt-2">RM 689</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('NIKE FREE METCON 6',559, 'img1/W+NIKE+FREE+METCON+6.avif')">
+     <img src="img1/W+NIKE+FREE+METCON+6.avif" />
+     <h3 class="font-semibold">NIKE FREE METCON 6</h3>
+     <p class="font-bold mt-2">RM 559</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('NIKE FREE METCON 6 SE',609, 'img1/W+NIKE+FREE+METCON+6+SE.avif')">
+     <img src="img1/W+NIKE+FREE+METCON+6+SE.avif" />
+     <h3 class="font-semibold">NIKE FREE METCON 6 SE</h3>
+     <p class="font-bold mt-2">RM 609</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('NIKE MOTIVA',489, 'img1/WMNS+NIKE+MOTIVA.avif')">
+     <img src="img1/WMNS+NIKE+MOTIVA.avif" />
+     <h3 class="font-semibold">NIKE MOTIVA</h3>
+     <p class="font-bold mt-2">RM 489</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('PWR NITRO™-SQD-2-Training-Shoes-Women',569, 'img1/PWR-NITRO™-SQD-2-Training-Shoes-Women.avif')">
+     <img src="img1/PWR-NITRO™-SQD-2-Training-Shoes-Women.avif" />
+     <h3 class="font-semibold">PWR NITRO™-SQD-2-Training-Shoes-Women</h3>
+     <p class="font-bold mt-2">RM 569</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('PWR-Hybrid-Training-Shoes',379, 'img1/PWR-Hybrid-Training-Shoes.avif')">
+     <img src="img1/PWR-Hybrid-Training-Shoes.avif" />
+     <h3 class="font-semibold">PWR-Hybrid-Training-Shoes WHITE</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('PWR-Hybrid-Training-Shoes-Women',379, 'img1/PWR-Hybrid-Training-Shoes-Women.avif')">
+     <img src="img1/PWR-Hybrid-Training-Shoes-Women.avif" />
+     <h3 class="font-semibold">PWR-Hybrid-Training-Shoes-Women</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="gym"
+     onclick="openProduct('PWR-Hybrid-Training-Shoes-Women',379, 'img1/PWR-Hybrid-Training-Shoes (1).avif')">
+     <img src="img1/PWR-Hybrid-Training-Shoes (1).avif" />
+     <h3 class="font-semibold">PWR-Hybrid-Training-Shoes BLACK</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+  <!-- Basketball -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('GLIDE NOVA FF 4',429, 'img1/GLIDE NOVA FF 4.webp')">
+     <img src="img1/GLIDE NOVA FF 4.webp" />
+     <h3 class="font-semibold">GLIDE NOVA FF 4</h3>
+     <p class="font-bold mt-2">RM 429</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('GELHOOP V17',499, 'img1/GELHOOP V17.webp')">
+     <img src="img1/GELHOOP V17.webp" />
+     <h3 class="font-semibold">GELHOOP V17</h3>
+     <p class="font-bold mt-2">RM 499</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('GELHOOP V17 S',499, 'img1/GEL HOOP V 17 S.avif')">
+     <img src="img1/GEL HOOP V 17 S.avif" />
+     <h3 class="font-semibold">GELHOOP V17 S</h3>
+     <p class="font-bold mt-2">RM 499</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('GEL-FASTBLAZE',399, 'img1/GEL-FASTBLAZE.webp')">
+     <img src="img1/GEL-FASTBLAZE.webp" />
+     <h3 class="font-semibold">GEL-FASTBLAZE</h3>
+     <p class="font-bold mt-2">RM 399</p>
+</div>
+
+  <!-- Sandals -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sandals"
+     onclick="openProduct('JORDAN NOLA',159, 'img1/WMNS+JORDAN+NOLA+SLIDE.avif')">
+     <img src="img1/WMNS+JORDAN+NOLA+SLIDE.avif" />
+     <h3 class="font-semibold">JORDAN NOLA</h3>
+     <p class="font-bold mt-2">RM 159</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sandals"
+     onclick="openProduct('NIKE OFFCOURT ADJUST',179, 'img1/NIKE+OFFCOURT+ADJUST+SLIDE.avif')">
+     <img src="img1/NIKE+OFFCOURT+ADJUST+SLIDE.avif" />
+     <h3 class="font-semibold">NIKE OFFCOURT ADJUST</h3>
+     <p class="font-bold mt-2">RM 179</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sandals"
+     onclick="openProduct('NIKE CALM',199, 'img1/W+NIKE+CALM+SLIDE.avif')">
+     <img src="img1/W+NIKE+CALM+SLIDE.avif" />
+     <h3 class="font-semibold">NIKE CALM</h3>
+     <p class="font-bold mt-2">RM 199</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="sandals"
+     onclick="openProduct('NIKE VICTORI ONE',129, 'img1/W+NIKE+VICTORI+ONE+SLIDE.avif')">
+     <img src="img1/W+NIKE+VICTORI+ONE+SLIDE.avif" />
+     <h3 class="font-semibold">NIKE VICTORI ONE</h3>
+     <p class="font-bold mt-2">RM 129</p>
+</div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="bg-black text-gray-300 text-center py-10">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+<!-- ====================== FILTER SCRIPT ====================== -->
+<script>
+function filterCategory(category) {
+  const items = document.querySelectorAll(".category-card");
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  // Remove active highlight
+  buttons.forEach(btn => btn.classList.remove("active-filter"));
+
+  // Add highlight to selected
+  event.target.classList.add("active-filter");
+
+  // Show/hide items
+  items.forEach(item => {
+    if (category === "all" || item.dataset.category === category) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+</script>
+
+<!-- PRODUCT POPUP MODAL -->
+<div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white p-6 w-96 rounded-lg shadow-lg">
+    <img id="modalImage" class="w-full h-48 object-contain mb-4">
+
+    <h2 id="modalName" class="text-xl font-bold mb-2"></h2>
+    <p id="modalPrice" class="text-lg font-semibold mb-4 text-yellow-600"></p>
+
+    <label class="block mb-2 font-semibold">Select Size</label>
+    <select id="modalSize" class="w-full border p-2 rounded mb-4">
+      <option value="">Choose Size</option>
+      <option>US 5</option>
+      <option>US 6</option>
+      <option>US 7</option>
+      <option>US 8</option>
+      <option>US 9</option>
+    </select>
+
+    <button onclick="addModalToCart()" 
+            class="w-full bg-black text-yellow-400 py-2 rounded font-semibold hover:bg-yellow-400 hover:text-black transition">
+      Add to Cart
+    </button>
+
+    <button onclick="closeModal()" 
+            class="w-full mt-3 bg-gray-300 text-black py-2 rounded font-semibold hover:bg-gray-400 transition">
+      Cancel
+    </button>
+  </div>
+</div>
+
+<script>
+let selectedProduct = {};
+
+function openProduct(name, price, image) {
+  selectedProduct = { name, price, image };
+
+  document.getElementById('modalName').innerText = name;
+  document.getElementById('modalPrice').innerText = 'RM ' + price;
+  document.getElementById('modalImage').src = image;
+
+  document.getElementById('productModal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.add('hidden');
+}
+
+function addModalToCart() {
+  const size = document.getElementById('modalSize').value;
+
+  if (!size) {
+    alert('Please select a size!');
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  cart.push({
+    name: selectedProduct.name,
+    price: selectedProduct.price,
+    size: size,
+    image: selectedProduct.image,
+    qty: 1
+  });
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  alert('Added to cart!');
+  closeModal();
+}
+</script>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+<script>
+function searchProduct() {
+  let input = document.getElementById("searchBar").value.trim().toLowerCase();
+
+  if (input === "") {
+    alert("Please enter a product name or brand.");
+    return;
+  }
+
+  localStorage.setItem("searchKeyword", input);
+
+  window.location.href = "search.html";
+}
+</script>
+
+<script>
+document.getElementById("searchBar").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    searchProduct();
+  }
+});
+</script>
+
+</body>
+</html>

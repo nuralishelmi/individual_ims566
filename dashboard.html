@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard – SoléAA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+<!-- NAVBAR -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <a href="index.html" class="text-3xl font-extrabold text-yellow-400">SoléAA</a>
+
+    <nav class="hidden md:flex gap-6 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <input id="searchBar" type="text" placeholder="Search…" class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+    <button onclick="searchProduct()" class="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+    Search
+    </button>
+      <a href="login.html" class="text-white hover:text-yellow-400">Login</a>
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container mx-auto px-6 py-8">
+  <h1 class="text-3xl font-bold mb-6">My Dashboard</h1>
+
+  <!-- ACCOUNT -->
+  <section class="bg-white rounded-xl p-6 mb-6 border border-yellow-300">
+    <h2 class="font-semibold mb-3">Account Details</h2>
+    <p><strong>Name:</strong> <span id="userName">—</span></p>
+    <p><strong>Email:</strong> <span id="userEmail">—</span></p>
+    <div class="mt-4">
+      <a href="edit-profile.html" class="inline-block bg-black text-white px-4 py-2 rounded mr-3">Edit Profile</a>
+      <button id="logoutBtn" class="inline-block bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+    </div>
+  </section>
+
+  <!-- ORDER HISTORY -->
+  <section class="bg-white rounded-xl p-6 mb-6 border border-yellow-300">
+    <h2 class="font-semibold mb-3">Order History</h2>
+    <div id="orderHistory">Loading...</div>
+  </section>
+
+  <!-- CART SUMMARY -->
+  <section class="bg-white rounded-xl p-6 mb-6 border border-yellow-300">
+    <h2 class="font-semibold mb-3">Cart Summary</h2>
+    <div id="cartSummary">Loading...</div>
+  </section>
+
+  <!-- SALES CHART -->
+  <section class="bg-white rounded-xl p-6 mb-6 border border-yellow-300">
+    <h2 class="font-semibold mb-3">Sales Trend (Last 6 Months)</h2>
+    <canvas id="salesChart" height="120"></canvas>
+  </section>
+</main>
+
+<script>
+// --- Load logged in user
+const user = JSON.parse(localStorage.getItem('user'));
+if (!user) {
+  // not logged in -> redirect to login
+  window.location.href = 'login.html';
+}
+document.getElementById('userName').textContent = user.name;
+document.getElementById('userEmail').textContent = user.email;
+
+// logout
+document.getElementById('logoutBtn').addEventListener('click', function(){
+  localStorage.removeItem('user');
+  alert('Logged out');
+  window.location.href = 'login.html';
+});
+
+// order history
+const orders = JSON.parse(localStorage.getItem('orders')) || [];
+const orderDiv = document.getElementById('orderHistory');
+if (orders.length === 0) {
+  orderDiv.innerHTML = '<p>No orders yet.</p>';
+} else {
+  orderDiv.innerHTML = orders.map(o => `
+    <div class="border p-3 rounded mb-2">
+      <p><strong>Order ID:</strong> ${o.id}</p>
+      <p><strong>Date:</strong> ${o.date}</p>
+      <p><strong>Total:</strong> RM ${Number(o.total).toFixed(2)}</p>
+    </div>
+  `).join('');
+}
+
+// cart summary
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartSummary = document.getElementById('cartSummary');
+if (cart.length === 0) {
+  cartSummary.innerHTML = '<p>Your cart is empty.</p>';
+} else {
+  cartSummary.innerHTML = cart.map(item => `
+    <div class="border p-3 rounded mb-2">
+      <p><strong>${item.name}</strong></p>
+      <p>Qty: ${item.quantity || item.qty || 1}</p>
+      <p>RM ${(item.price).toFixed ? item.price.toFixed(2) : Number(item.price).toFixed(2)}</p>
+    </div>
+  `).join('');
+}
+
+// cart count top-right
+(function(){ const c = JSON.parse(localStorage.getItem('cart')) || []; const count = c.reduce((s,i)=>s + (i.quantity||i.qty||1),0); document.getElementById('cartCount').innerText = count; })();
+
+// sales chart (demo)
+const ctx = document.getElementById('salesChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+    datasets: [{ label: 'Sales (RM)', data: [120,190,300,500,200,300], borderColor:'black', backgroundColor:'rgba(0,0,0,0.05)', tension:0.3 }]
+  },
+  options: { responsive:true, scales:{ y:{ beginAtZero:true } } }
+});
+</script>
+
+</body>
+</html>

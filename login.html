@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – SoléAA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+  <!-- ===================== NAVBAR ===================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</div>
+
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-6 text-white">
+      <input id="searchInput" type="text" placeholder="Search…" 
+        class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+      <button onclick="searchProducts()" 
+        class="hidden md:inline-block bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+        Search
+      </button>
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white shadow-xl p-10 rounded-xl w-full max-w-md border border-yellow-400">
+
+      <h1 class="text-3xl font-bold mb-6 text-center">Welcome Back</h1>
+
+      <form id="loginForm" class="space-y-4">
+
+        <div>
+          <label class="font-semibold">Email</label>
+          <input
+            type="email"
+            id="email"
+            required
+            class="w-full px-4 py-2 border rounded-lg"
+          />
+        </div>
+
+        <div>
+          <label class="font-semibold">Password</label>
+          <input
+            type="password"
+            id="password"
+            required
+            class="w-full px-4 py-2 border rounded-lg"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-black text-white py-2 rounded-lg hover:bg-yellow-500 hover:text-black transition"
+        >
+          Login
+        </button>
+
+        <p class="text-center mt-3">
+          Don't have an account?
+          <a href="register.html" class="text-blue-600 font-semibold hover:underline">
+            Register
+          </a>
+        </p>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let email = document.getElementById("email").value;
+      let pass = document.getElementById("password").value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      let foundUser = users.find(
+        (u) => u.email === email && u.password === pass
+      );
+
+      if (!foundUser) {
+        alert("Invalid email or password.");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(foundUser));
+
+
+      alert("Login successful!");
+      window.location.href = "dashboard.html";
+    });
+  </script>
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+function loginUser() {
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  let regUser = JSON.parse(localStorage.getItem("registeredUser"));
+
+  if (!regUser) {
+    alert("No account registered yet!");
+    return;
+  }
+
+  // Check login match
+  if (regUser.email === email && regUser.password === password) {
+
+    // SIMPAN logged in user → supaya dashboard boleh baca
+    localStorage.setItem("user", JSON.stringify({
+    name: nameInput,
+    email: emailInput
+}));
+
+    alert("Login successful!");
+    window.location.href = "dashboard.html";
+  } 
+  else {
+    alert("Invalid email or password!");
+  }
+}
+</script>
+localStorage.setItem("user", JSON.stringify({
+    name: nameInput,
+    email: emailInput
+}));
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>

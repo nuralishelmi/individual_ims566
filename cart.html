@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart – SoléAA</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+<!-- ====================== NAVBAR ====================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+
+    <!-- BRAND -->
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">
+      SoléAA
+    </div>
+
+    <!-- NAVBAR LINKS -->
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <!-- RIGHT OPTIONS -->
+    <div class="flex items-center gap-6 text-white">
+
+      <!-- SEARCH -->
+      <input type="text" placeholder="Search…" 
+             class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+
+      <!-- LOGIN -->
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+
+      <!-- CART -->
+      <a href="cart.html" class="relative hover:text-yellow-400">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h18v18H3V3z" />
+        </svg>
+        <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        </span>
+
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<!-- ====================== CART PAGE ====================== -->
+<section class="container mx-auto px-6 py-10">
+
+  <h1 class="text-4xl font-bold mb-8">Your Cart</h1>
+
+  <!-- CART CONTAINER -->
+  <div id="cartItems" class="space-y-6"></div>
+
+  <!-- TOTAL PRICE -->
+  <div class="mt-10 text-right">
+    <h2 class="text-3xl font-bold">Total: <span id="totalPrice">RM 0</span></h2>
+
+    <button onclick="goToPayment()" 
+        class="mt-6 bg-black text-white px-8 py-3 rounded-lg hover:bg-yellow-500 hover:text-black transition">
+    Proceed to Pay
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="bg-black text-gray-300 text-center py-10 mt-10">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+
+<!-- ====================== CART SCRIPT ====================== -->
+<script>
+function loadCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cartContainer = document.getElementById("cartItems");
+
+  if (cart.length === 0) {
+    cartContainer.innerHTML = `
+      <p class="text-lg text-gray-700">Your cart is empty.</p>
+    `;
+    document.getElementById("totalPrice").innerText = "RM 0";
+    updateCartCount();
+    return;
+  }
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    if (!item.quantity) item.quantity = 1;
+
+    total += item.price * item.quantity;
+
+    html += `
+      <div class="bg-white shadow p-5 rounded-xl border border-gray-300 flex items-center gap-6">
+
+        <img src="${item.image}" class="w-24 h-24 object-cover rounded">
+
+        <div class="flex-1">
+          <p class="text-xl font-bold">${item.name}</p>
+          <p class="text-lg font-semibold text-yellow-600">RM ${item.price}</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="decreaseQty(${index})" class="px-3 py-1 bg-gray-300 rounded">-</button>
+          <span class="text-xl">${item.quantity}</span>
+          <button onclick="increaseQty(${index})" class="px-3 py-1 bg-gray-300 rounded">+</button>
+        </div>
+
+        <button onclick="removeItem(${index})" 
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+          Delete
+        </button>
+
+      </div>
+    `;
+  });
+
+  cartContainer.innerHTML = html;
+  document.getElementById("totalPrice").innerText = "RM " + total;
+
+  updateCartCount(); // 🔥 UPDATE BADGE SETIAP KALI CART DIBUAT
+}
+
+function increaseQty(index) {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  cart[index].quantity += 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+function decreaseQty(index) {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart[index].quantity > 1) {
+    cart[index].quantity -= 1;
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+loadCart();
+</script>
+
+
+
+<script>
+function goToPayment() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  // Simpan total ke localStorage
+  localStorage.setItem("paymentCart", JSON.stringify(cart));
+
+  window.location.href = "payment.html";
+}
+</script>
+
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+
+</body>
+</html>
+

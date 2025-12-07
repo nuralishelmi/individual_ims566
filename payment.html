@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment – SoléAA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+<!-- NAVBAR -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex justify-between items-center px-6">
+    <div class="text-3xl font-extrabold text-yellow-400">SoléAA</div>
+    <nav class="text-white hidden md:flex gap-8">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="container mx-auto px-6 py-10">
+
+  <h1 class="text-4xl font-bold mb-8">Payment</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <!-- ORDER SUMMARY -->
+    <div class="bg-white p-6 rounded-xl shadow border border-yellow-400">
+      <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
+
+      <div id="orderList" class="space-y-4"></div>
+
+      <p class="text-2xl font-bold mt-6">
+        Total: <span id="orderTotal">RM 0</span>
+      </p>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <div class="bg-white p-6 rounded-xl shadow border border-yellow-400">
+
+      <h2 class="text-2xl font-bold mb-4">Billing Details</h2>
+
+      <div class="space-y-4">
+
+        <input type="text" id="custName" placeholder="Full Name" 
+               class="w-full p-3 border rounded-lg">
+
+        <input type="text" id="custAddress" placeholder="Address"
+               class="w-full p-3 border rounded-lg">
+
+        <input type="text" id="custPhone" placeholder="Phone (e.g., 0123456789)"
+               class="w-full p-3 border rounded-lg">
+
+        <h2 class="text-xl font-bold mt-6">Payment Method</h2>
+
+        <select id="paymentMethod" onchange="showPaymentFields()" 
+                class="w-full p-3 border rounded-lg">
+          <option value="" disabled selected>Select Payment Method</option>
+          <option value="Online Banking">Online Banking</option>
+          <option value="Card">Debit/Credit Card</option>
+          <option value="E-Wallet">E-Wallet</option>
+        </select>
+
+        <!-- ONLINE BANKING -->
+        <div id="onlineBanking" class="hidden mt-4">
+          <label class="font-semibold block mb-2">Select Bank</label>
+          <select id="bankSelect" class="w-full p-3 border rounded-lg">
+            <option>Maybank2u</option>
+            <option>CIMB Clicks</option>
+            <option>RHB Now</option>
+            <option>Bank Islam</option>
+            <option>Public Bank</option>
+            <option>Hong Leong Bank</option>
+          </select>
+        </div>
+
+        <!-- CARD PAYMENT -->
+        <div id="cardPayment" class="hidden mt-4 space-y-3">
+          <input type="text" id="cardNumber" maxlength="16" placeholder="Card Number"
+                 class="w-full p-3 border rounded-lg">
+
+          <div class="flex gap-4">
+            <input type="text" id="cardExpiry" maxlength="5" placeholder="MM/YY"
+                   class="w-1/2 p-3 border rounded-lg">
+
+            <input type="text" id="cardCVV" maxlength="3" placeholder="CVV"
+                   class="w-1/2 p-3 border rounded-lg">
+          </div>
+        </div>
+
+        <!-- E-WALLET -->
+        <div id="eWallet" class="hidden mt-4">
+          <label class="font-semibold block mb-2">Select E-Wallet</label>
+          <select id="walletSelect" class="w-full p-3 border rounded-lg">
+            <option>Touch 'n Go</option>
+            <option>GrabPay</option>
+            <option>Boost</option>
+          </select>
+        </div>
+
+        <button onclick="completePayment()" 
+                class="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-yellow-500 hover:text-black transition">
+          Pay Now
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-gray-300 text-center py-10 mt-12">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+
+<script>
+// LOAD ORDER ITEMS
+window.onload = function () {
+  let cart = JSON.parse(localStorage.getItem("paymentCart")) || [];
+  let list = document.getElementById("orderList");
+
+  if (cart.length === 0) {
+    list.innerHTML = "<p>Your cart is empty.</p>";
+    return;
+  }
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * (item.quantity || 1);
+
+    html += `
+      <div class="flex justify-between border-b pb-2">
+        <span>${item.name} (x${item.quantity || 1})</span>
+        <span>RM ${(item.price * (item.quantity || 1)).toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  list.innerHTML = html;
+  document.getElementById("orderTotal").textContent = "RM " + total.toFixed(2);
+};
+
+
+// SHOW PAYMENT FIELDS
+function showPaymentFields() {
+  let method = document.getElementById("paymentMethod").value;
+
+  document.getElementById("onlineBanking").classList.add("hidden");
+  document.getElementById("cardPayment").classList.add("hidden");
+  document.getElementById("eWallet").classList.add("hidden");
+
+  if (method === "Online Banking") {
+    document.getElementById("onlineBanking").classList.remove("hidden");
+  }
+  else if (method === "Card") {
+    document.getElementById("cardPayment").classList.remove("hidden");
+  }
+  else if (method === "E-Wallet") {
+    document.getElementById("eWallet").classList.remove("hidden");
+  }
+}
+
+
+// COMPLETE PAYMENT
+function completePayment() {
+  let name = document.getElementById("custName").value;
+  let address = document.getElementById("custAddress").value;
+  let phone = document.getElementById("custPhone").value;
+  let method = document.getElementById("paymentMethod").value;
+  let cart = JSON.parse(localStorage.getItem("paymentCart")) || [];
+
+  if (!name || !address || !phone || !method) {
+    alert("Please complete all billing details.");
+    return;
+  }
+
+  // EXTRA VALIDATION
+  if (method === "Card") {
+    if (
+      document.getElementById("cardNumber").value.length !== 16 ||
+      document.getElementById("cardCVV").value.length !== 3
+    ) {
+      alert("Invalid card details.");
+      return;
+    }
+  }
+
+  // CALCULATE TOTAL
+  let total = 0;
+  cart.forEach(item => total += item.price * (item.quantity || 1));
+
+  // RECEIPT ID
+  const receiptID = "REC" + Math.floor(100000 + Math.random() * 900000);
+
+  // DATE
+  const date = new Date().toLocaleString("en-MY", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+
+  // SAVE RECEIPT
+  const receiptData = {
+    id: receiptID,
+    name,
+    address,
+    phone,
+    method,
+    items: cart,
+    total,
+    date
+  };
+
+  localStorage.setItem("latestReceipt", JSON.stringify(receiptData));
+
+  // SAVE TO ORDER HISTORY (dashboard)
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push({
+    id: receiptID,
+    date,
+    total,
+    items: cart
+  });
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  // CLEAR CART
+  localStorage.removeItem("cart");
+  localStorage.removeItem("paymentCart");
+
+  // GO TO RECEIPT PAGE
+  window.location.href = "receipt.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections – SoléAA</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Active button highlight */
+    .active-filter {
+      background-color: black !important;
+      color: yellow !important;
+    }
+  </style>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+<!-- ====================== NAVBAR ====================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <!-- BRAND -->
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</div>
+
+    <!-- LINKS -->
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <!-- SEARCH + LOGIN + CART -->
+    <div class="flex items-center gap-6 text-white">
+     <input id="searchBar" type="text" placeholder="Search…" class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+    <button onclick="searchProduct()" class="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+    Search
+    </button>
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ====================== PAGE TITLE ====================== -->
+ <section class="w-full h-[300px] bg-black flex items-center justify-center text-yellow-400">
+  <h1 class="text-6xl font-extrabold tracking-tight">Collection</h1>
+ </section>
+
+
+<!-- ====================== BRAND FILTER BUTTONS ====================== -->
+ <section class="container mx-auto px-6 py-10">
+  <h1 class="text-4xl font-bold mb-6">All Collection</h1>
+  <p class="text-gray-600">Choose a brand to filter your preferred shoes.</p>
+</section>
+  <section class="container mx-auto px-6">
+  <div class="flex flex-wrap gap-4 mb-10">
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition active-filter"
+            onclick="filterCategory('all')">All</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('puma')">Puma</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('nike')">Nike</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('new balance')">New Balance</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('asics')">Asics</button>
+
+    <button class="filter-btn bg-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-black hover:text-yellow-400 transition"
+            onclick="filterCategory('onitsuka')">Onitsuka Tiger</button>
+
+  </div>
+</section>
+
+
+<!-- ====================== PRODUCT GRID ====================== -->
+<section class="container mx-auto px-6 pb-16 grid grid-cols-2 md:grid-cols-4 gap-8" id="productGrid">
+
+  <!-- Puma Products -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Bella Sneakers Women', 329, 'img6/bellasneakerswomen.avif')">
+     <img src="img6/bellasneakerswomen.avif" />
+     <h3 class="font-semibold">Bella Sneakers Women</h3>
+     <p class="font-bold mt-2">RM 329</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Caracal trainers', 359, 'img6/caracaltrainers.avif')">
+     <img src="img6/caracaltrainers.avif" />
+     <h3 class="font-semibold">Caracal trainers</h3>
+     <p class="font-bold mt-2">RM 359</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Palermo Sneakers Unisex', 215, 'img6/palermosneakersunisex.avif')">
+     <img src="img6/palermosneakersunisex.avif" />
+     <h3 class="font-semibold">Palermo Sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 215</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Speedcat OG Sneakers Unisex', 549, 'img6/Speedcat OG Sneakers Unisex.avif')">
+     <img src="img6/Speedcat OG Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Speedcat OG Sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 549</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('PUMA x ROSÉ Speedcat Ballet Shoes Women', 429, 'img6/puma x rose speedcat ballet shoes women.avif')">
+     <img src="img6/puma x rose speedcat ballet shoes women.avif" />
+     <h3 class="font-semibold">PUMA x ROSÉ Speedcat Ballet Shoes Women</h3>
+     <p class="font-bold mt-2">RM 429</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Super Team Palais Artisan Sneakers Unisex', 549, 'img6/Super Team Palais Artisan Sneakers Unisex.avif')">
+     <img src="img6/Super Team Palais Artisan Sneakers Unisex.avif" />
+     <h3 class="font-semibold">Super Team Palais Artisan Sneakers Unisex</h3>
+     <p class="font-bold mt-2">RM 549</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Speedcat Piping Sneakers Women', 579, 'img6/Speedcat Piping Snekers Women.avif')">
+     <img src="img6/Speedcat Piping Snekers Women.avif" />
+     <h3 class="font-semibold">Speedcat Piping Sneakers Women</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="puma"
+     onclick="openProduct('Speedcat Premium Unisex', 579, 'img6/Speedcat Premiun Unisex.avif')">
+     <img src="img6/Speedcat Premiun Unisex.avif" />
+     <h3 class="font-semibold">Speedcat Premium Unisex</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+  <!-- Nike -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('KILLSHOT 2 LTR', 351, 'img6/KILLSHOT 2 LTR.avif')">
+     <img src="img6/KILLSHOT 2 LTR.avif" />
+     <h3 class="font-semibold">KILLSHOT 2 LTR</h3>
+     <p class="font-bold mt-2">RM 351</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('NIKE AIR PEGASUS WAVE SE', 469, 'img6/NIKE AIR PEGASUS WAVE SE.avif')">
+     <img src="img6/NIKE AIR PEGASUS WAVE SE.avif" />
+     <h3 class="font-semibold">NIKE AIR PEGASUS WAVE SE</h3>
+     <p class="font-bold mt-2">RM 469</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('NIKE GATO LV8', 509, 'img6/NIKE GATO LV8.avif')">
+     <img src="img6/NIKE GATO LV8.avif" />
+     <h3 class="font-semibold">NIKE GATO LV8</h3>
+     <p class="font-bold mt-2">RM 509</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('W NIKE TERRA MANTA', 311, 'img6/W NIKE TERRA MANTA.avif')">
+     <img src="img6/W NIKE TERRA MANTA.avif" />
+     <h3 class="font-semibold">W NIKE TERRA MANTA</h3>
+     <p class="font-bold mt-2">RM 311</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('W NIKE V2K RUN', 377, 'img6/W NIKE V2K RUN.avif')">
+     <img src="img6/W NIKE V2K RUN.avif" />
+     <h3 class="font-semibold">W NIKE V2K RUN</h3>
+     <p class="font-bold mt-2">RM 377</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('WMNS NIKE T90', 305, 'img6/WMNS NIKE T90.avif')">
+     <img src="img6/WMNS NIKE T90.avif" />
+     <h3 class="font-semibold">WMNS NIKE T90</h3>
+     <p class="font-bold mt-2">RM 305</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('Nike P-6000 SE Women', 489, 'img6/W+NIKE+P-6000+SE.avif')">
+     <img src="img6/W+NIKE+P-6000+SE.avif" />
+     <h3 class="font-semibold">Nike P-6000 SE Women</h3>
+     <p class="font-bold mt-2">RM 489</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="nike"
+     onclick="openProduct('Nike Dunk Low X LEGO', 499, 'img6/dunk low lego collection older shoes.avif')">
+     <img src="img6/dunk low lego collection older shoes.avif" />
+     <h3 class="font-semibold">Nike Dunk Low X LEGO</h3>
+     <p class="font-bold mt-2">RM 499</p>
+</div>
+
+  <!-- New Balance -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('327', 479, 'img6/327.webp')">
+     <img src="img6/327.webp" />
+     <h3 class="font-semibold">327</h3>
+     <p class="font-bold mt-2">RM 479</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('740', 529, 'img6/740.webp')">
+     <img src="img6/740.webp" />
+     <h3 class="font-semibold">740</h3>
+     <p class="font-bold mt-2">RM 529</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('1906L', 699, 'img6/1906L.webp')">
+     <img src="img6/1906L.webp" />
+     <h3 class="font-semibold">1906L</h3>
+     <p class="font-bold mt-2">RM 699</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('9060', 709, 'img6/9060.webp')">
+     <img src="img6/9060.webp" />
+     <h3 class="font-semibold">9060</h3>
+     <p class="font-bold mt-2">RM 709</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('District Vision x New Balance SC Elite V5',1099, 'img6/District Vision x New Balance SC Elite V5.webp')">
+     <img src="img6/District Vision x New Balance SC Elite V5.webp" />
+     <h3 class="font-semibold">District Vision x New Balance SC Elite V5</h3>
+     <p class="font-bold mt-2">RM 1,099</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('MT10',569, 'img6/MT10.webp')">
+     <img src="img6/MT10.webp" />
+     <h3 class="font-semibold">MT10</h3>
+     <p class="font-bold mt-2">RM 569</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('574',449, 'img6/574 Core (1).webp')">
+     <img src="img6/574 Core (1).webp" />
+     <h3 class="font-semibold">574</h3>
+     <p class="font-bold mt-2">RM 449</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="new balance"
+     onclick="openProduct('FuelCell Rebel V5',649, 'img6/Fuelcell Rebel v5.webp')">
+     <img src="img6/Fuelcell Rebel v5.webp" />
+     <h3 class="font-semibold">FuelCell Rebel V5</h3>
+     <p class="font-bold mt-2">RM 649</p>
+</div>
+
+  <!-- Asics -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GEL-NYC',579, 'img6/GEL-NYC 2055 1.webp')">
+     <img src="img6/GEL-NYC 2055 1.webp" />
+     <h3 class="font-semibold">GEL-NYC</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GEL-NYC BLUE',599, 'img6/GEL-NYC 2055 2.webp')">
+     <img src="img6/GEL-NYC 2055 2.webp" />
+     <h3 class="font-semibold">GEL-NYC BLUE</h3>
+     <p class="font-bold mt-2">RM 599</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GEL-NYC 2055 WHITE',579, 'img6/GEL-NYC 2055 1.webp')">
+     <img src="img6/GEL-NYC 2055 1.webp" />
+     <h3 class="font-semibold">GEL-NYC 2055 WHITE</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GEL-NYC 2055 WINE',579, 'img6/GEL-NYC 2055 2.webp')">
+     <img src="img6/GEL-NYC 2055 2.webp" />
+     <h3 class="font-semibold">GEL-NYC 2055 WINE</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GEL-STYRAX',1049, 'img6/GEL-STYRAX.webp')">
+     <img src="img6/GEL-STYRAX.webp" />
+     <h3 class="font-semibold">GEL-STYRAX</h3>
+     <p class="font-bold mt-2">RM 1,049</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('GT-2160',579, 'img6/GT-2160.jpeg')">
+     <img src="img6/GT-2160.jpeg" />
+     <h3 class="font-semibold">GT-2160</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('ABOVE THE CLOUDS x GEL-QUANTUM 360',899, 'img6/ABOVE THE CLOUDS x GEL-QUANTUM 360.webp')">
+     <img src="img6/ABOVE THE CLOUDS x GEL-QUANTUM 360.webp" />
+     <h3 class="font-semibold">ABOVE THE CLOUDS x GEL-QUANTUM 360</h3>
+     <p class="font-bold mt-2">RM 899</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="asics"
+     onclick="openProduct('SKYHAND OG',479, 'img6/SKYHAND OG.webp')">
+     <img src="img6/SKYHAND OG.webp" />
+     <h3 class="font-semibold">SKYHAND OG</h3>
+     <p class="font-bold mt-2">RM 479</p>
+</div>
+
+  <!-- Onitsuka -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Mexico 66 PARATY',570, 'img6/MEXICO 66 PARATY.webp')">
+     <img src="img6/MEXICO 66 PARATY.webp" />
+     <h3 class="font-semibold">Mexico 66 PARATY</h3>
+     <p class="font-bold mt-2">RM 570</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Mexico 66 SABOT',650, 'mg6/MEXICO 66 SABOT.webp')">
+     <img src="img6/MEXICO 66 SABOT.webp" />
+     <h3 class="font-semibold">Mexico 66 SABOT</h3>
+     <p class="font-bold mt-2">RM 650</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Mexico 66 SD',880, 'mg6/MEXICO 66 SD.webp')">
+     <img src="img6/MEXICO 66 SD.webp" />
+     <h3 class="font-semibold">Mexico 66 SD</h3>
+     <p class="font-bold mt-2">RM 880</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Mexico 66 SLIP-ON',680, 'img6/MEXICO 66 SLIP-ON.webp')">
+     <img src="img6/MEXICO 66 SLIP-ON.webp" />
+     <h3 class="font-semibold">Mexico 66 SLIP-ON</h3>
+     <p class="font-bold mt-2">RM 680</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Mexico 66 TGRS',670, 'img6/MEXICO 66 TGRS.webp')">
+     <img src="img6/MEXICO 66 TGRS.webp" />
+     <h3 class="font-semibold">Mexico 66 TGRS</h3>
+     <p class="font-bold mt-2">RM 670</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('Tsunahiki SLIP-ON',700, 'TSUNAHIKI SLIP-ON.webp')">
+     <img src="img6/TSUNAHIKI SLIP-ON.webp" />
+     <h3 class="font-semibold">Tsunahiki SLIP-ON</h3>
+     <p class="font-bold mt-2">RM 700</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('EDR 78',700, 'img6/EDR 78.webp')">
+     <img src="img6/EDR 78.webp" />
+     <h3 class="font-semibold">EDR 78</h3>
+     <p class="font-bold mt-2">RM 700</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="onitsuka"
+     onclick="openProduct('TIGCOURT',1150, 'img6/tigcourt.webp')">
+     <img src="img6/tigcourt.webp" />
+     <h3 class="font-semibold">TIGCOURT</h3>
+     <p class="font-bold mt-2">RM 1,150</p>
+</div>
+</section>
+
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="bg-black text-gray-300 py-10 text-center">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+
+<!-- ====================== FILTER SCRIPT ====================== -->
+<script>
+function filterProducts(brand) {
+  const products = document.querySelectorAll(".product-card");
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  // remove highlight from all buttons
+  buttons.forEach(btn => btn.classList.remove("active-filter"));
+
+  // highlight selected button
+  event.target.classList.add("active-filter");
+
+  // filtering process
+  products.forEach(product => {
+    if (brand === "all" || product.dataset.brand === brand) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+  });
+}
+</script>
+
+<!-- PRODUCT POPUP MODAL -->
+<div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white p-6 w-96 rounded-lg shadow-lg">
+    <img id="modalImage" class="w-full h-48 object-contain mb-4">
+
+    <h2 id="modalName" class="text-xl font-bold mb-2"></h2>
+    <p id="modalPrice" class="text-lg font-semibold mb-4 text-yellow-600"></p>
+
+    <label class="block mb-2 font-semibold">Select Size</label>
+    <select id="modalSize" class="w-full border p-2 rounded mb-4">
+      <option value="">Choose Size</option>
+      <option>US 5</option>
+      <option>US 6</option>
+      <option>US 7</option>
+      <option>US 8</option>
+      <option>US 9</option>
+    </select>
+
+    <button onclick="addModalToCart()" 
+            class="w-full bg-black text-yellow-400 py-2 rounded font-semibold hover:bg-yellow-400 hover:text-black transition">
+      Add to Cart
+    </button>
+
+    <button onclick="closeModal()" 
+            class="w-full mt-3 bg-gray-300 text-black py-2 rounded font-semibold hover:bg-gray-400 transition">
+      Cancel
+    </button>
+  </div>
+</div>
+
+<script>
+let selectedProduct = {};
+
+function openProduct(name, price, image) {
+  selectedProduct = { name, price, image };
+
+  document.getElementById('modalName').innerText = name;
+  document.getElementById('modalPrice').innerText = 'RM ' + price;
+  document.getElementById('modalImage').src = image;
+
+  document.getElementById('productModal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.add('hidden');
+}
+
+function addModalToCart() {
+  const size = document.getElementById('modalSize').value;
+
+  if (!size) {
+    alert('Please select a size!');
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  cart.push({
+    name: selectedProduct.name,
+    price: selectedProduct.price,
+    size: size,
+    image: selectedProduct.image,
+    qty: 1
+  });
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  alert('Added to cart!');
+  closeModal();
+}
+</script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedBrand = urlParams.get("brand");
+
+  document.getElementById("brand-title").textContent = selectedBrand.toUpperCase();
+</script>
+
+<script>
+function filterCategory(category) {
+  const products = document.querySelectorAll(".category-card");
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  // buang highlight semua button
+  buttons.forEach(btn => btn.classList.remove("active-filter"));
+
+  // highlight button yang di-click
+  event.target.classList.add("active-filter");
+
+  // filter product
+  products.forEach(product => {
+    if (category === "all" || product.dataset.category === category) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+  });
+}
+</script>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+<script>
+function searchProduct() {
+  let input = document.getElementById("searchBar").value.trim().toLowerCase();
+
+  if (input === "") {
+    alert("Please enter a product name or brand.");
+    return;
+  }
+
+  localStorage.setItem("searchKeyword", input);
+
+  window.location.href = "search.html";
+}
+</script>
+
+<script>
+document.getElementById("searchBar").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    searchProduct();
+  }
+});
+</script>
+
+</body>
+</html>

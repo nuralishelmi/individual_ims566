@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search Results – SoléAA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fef3dc] p-6">
+
+<h1 class="text-3xl font-bold mb-6">Search Results</h1>
+
+<a href="index.html" 
+   class="inline-block mb-6 bg-black text-white px-5 py-2 rounded-lg 
+          hover:bg-yellow-500 hover:text-black transition">
+  ← Back to Home
+</a>
+
+<div id="results" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+
+
+<div id="results" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+
+<script>
+
+
+// ===========================
+// PRODUCT LIST
+// ===========================
+const products = [
+  { name: "Speedcat Lux Ballet Sneakers Women", brand: "puma", price: 399, image: "img/Speedcatluxballetsneakerswomen" },
+  { name: "NB 530", brand: "new balance", price: 499, image: "img/530 MEN.webp" },
+  { name: "KIMHEKIM x GEL-NIMBUS 10.1", brand: "asics", price: 779, image: "img/kimhekimxgel.jpeg" },
+  { name: "Tokuten", brand: "onitsuka", price: 680, image: "img/tokuten.webp" },
+  { name: "MEXICO 66 SD VIN", brand: "onitsuka", price: 870, image: "img2/MEXICO 66 SD VIN.webp" },
+  { name: "MEXICO 66 SLIP-ON", brand: "onitsuka", price: 680, image: "img2/MEXICO 66 SLIP-ON.webp" },
+  { name: "1906A", brand: "new balance", price: 499, image: "img2/1906A.webp" },
+  { name: "1906R", brand: "new balance", price: 569, image: "img2/1906R.webp" },
+  { name: "SPEEDCAT METALIC SNEAKERS UNISEX", brand: "puma", price: 549, image: "img2/Speedcat-Metallic-Sneakers-Unisex.avif" },
+  { name: "SPEEDCAT LUX SNEAKERS UNISEX", brand: "puma", price: 579, image: "img2/Speedcat-Lux-Sneakers-Unisex.avif" },
+  { name: "KOBE AIR FORCE I LOW", brand: "nike", price: 559, image: "img2/KOBE+AIR+FORCE+1+LOW.avif" },
+  { name: "AIR JORDAN 1LOW SE", brand: "nike", price: 579, image: "img2/AIR+JORDAN+1+LOW+SE.avif" },
+  { name: "MEXICO 66 TGRS", brand: "onitsuka", price: 760, image: "img2/MEXICO 66 TGRS.webp" },
+  { name: "MEXICO 66 SD", brand: "onitsuka", price: 880, image: "img2/MEXICO 66 SD.webp" },
+  { name: "SPEEDCAT LUX BALLET SNEAKERS WOMEN", brand: "puma", price: 399, image: "img2/Speedcat-Lux-Ballet-Sneakers-Women.avif" },
+  { name: "SPEEDCAT BALLET SHOES WOMEN", brand: "puma", price: 379, image: "img2/Speedcat-Ballet-Shoes-Women.avif" },
+  { name: "NIKE FIELD GENERAL", brand: "nike", price: 559, image: "img2/WMNS+NIKE+FIELD+GENERAL.avif" },
+  { name: "NIKE GAMMA FORCE", brand: "nike", price: 368, image: "img2/WMNS+NIKE+GAMMA+FORCE.avif" },
+  { name: "9060", brand: "new balance", price: 469, image: "img2/9060.webp" },
+  { name: "327", brand: "new balance", price: 479, image: "img2/327.webp" },
+  { name: "530 BUNGEE LACE", brand: "new balance", price: 299, image: "img2/530 BUNGEE LACE.webp" },
+  { name: "1906 HOOP 7 LOOP", brand: "new balance", price: 359, image: "img2/1906 HOOK & LOOP.webp" },
+  { name: "740 BUNGEE", brand: "new balance", price: 369, image: "img2/740 BUNGEE.webp" },
+  { name: "327 BUNGEE LACE", brand: "new balance", price: 269, image: "img2/327 BUNGEE LACE.webp" },
+  { name: "SERRANO KIDS", brand: "onitsuka", price: 360, image: "img2/SERRONO KIDS.webp" },
+  { name: "MEXICO 66 KIDS", brand: "onitsuka", price: 360, image: "img2/MEXICO 66 KIDS.webp" },
+  { name: "MEXICO 66 KIDS FLOWER", brand: "onitsuka", price: 360, image: "img2/MEXICO 66 KIDS FLOWER.webp" },
+  { name: "MEXICO MID RUNNER KIDS", brand: "onitsuka", price: 390, image: "img2/MEXICO MID RUNNER KIDS.webp" },
+  { name: "Nike Pegasus Premium", brand: "Nike", price: 995, image: "img3/NIKE+PEGASUS+PREMIUM.avif " },
+  { name: "Nike Vomero Plus", brand: "Nike", price: 759, image: "img3/NIKE+VOMERO+PLUS.avif " },
+  { name: "Nike Zoom Fly 6", brand: "Nike", price: 789, image: "img3/ZOOM+FLY+6.avif " },
+  { name: "Nike Pegasus 41", brand: "Nike", price: 609, image: "img3/AIR+ZOOM+PEGASUS+41.avif " },
+  { name: "Fuelcell Rebel V5", brand: "New Balance", price: 649, image: "img3/FUELCELL REBEL V5.webp " },
+  { name: "Fresh Foam X 1080 V14", brand: "New Balance", price: 529, image: "img3/FRESH FOAM X 880V14.webp " },
+  { name: "Sonic Blast", brand: "Asics", price: 829, image: "img3/SONIC BLAST.webp" },
+  { name: "Noosa TRI 16", brand: "Asics", price: 549, image: "img3/NOOSA TRI 16.webp " },
+  { name: "Speedcat Lux Sneakers Unisex", brand: "Puma", price: 579, image: "img3/Speedcat-Lux-Sneakers-Unisex.avif " },
+  { name: "530", brand: "New Balance", price: 499, image: "img3/530 MEN.webp " },
+  { name: "550", brand: "New Balance", price: 199, image: "img3/550.webp " },
+  { name: "Tokuten", brand: "Onitsuka Tiger", price: 680, image: "img3/TOKUTEN.webp " },
+  { name: "Tsunahiki Slip-On", brand: "Onitsuka Tiger", price: 700, image: "img3/TSUNAHIKI SLIP-ON.webp " },
+  { name: "California 78 EX VIN", brand: "Onitsuka Tiger", price: 870, image: "img3/CALIFORNIA 78 EX VIN.webp " },
+  { name: "Tigtrail", brand: "Onitsuka Tiger", price: 1190, image: "img3/TIGTRAIL.webp " },
+  { name: "All-Pro Nitro™ 2 Basketball Shoes Unisex", brand: "Puma", price: 549, image: "img3/All-Pro-NITRO™-SkyBreak-Basketball-Shoes-Unisex.avif " },
+  { name: "All-Pro Nitro™ 2 Basketball Shoes Unisex", brand: "Puma", price: 649, image: "img3/All Pro NITRO™ 2 Basketball Shoes Unisex.avif " },
+  { name: "Court Pro 2 Marble Basketball Shoes Unisex", brand: "Puma", price: 369, image: "img3/Court Pro 2 Marble Basketball Shoes Unisex.avif " },
+  { name: "Court Pro 2 Metallic Basketball Shoes Unisex ", brand: "Puma", price: 369, image: "img3/Court-Pro-2-Metallic-Basketball-Shoes-Unisex.avif " },
+  { name: "Gelhoop V17 S", brand: "Asics", price: 499, image: "img3/GELHOOP V 17 S.webp " },
+  { name: "Gelbrust 28 Extra Wide", brand: "Asics", price: 419, image: "img3/GELBURST 28 EXTRA WIDE.webp " },
+  { name: "Glide Nova FF 3", brand: "Asics", price: 349, image: "img3/GLIDE NOVA FF 3.webp " },
+  { name: "Unpre Ars Low 2 Rt", brand: "Asics", price: 549, image: "img3/UNPRE ARS LOW 2 RT.webp " },
+  { name: "Lebron Tr 1", brand: "Nike", price: 609, image: "img3/LEBRON+TR+1.avif " },
+  { name: "Nike Air Alpha Trainer 6", brand: "Nike", price: 245, image: "img3/M+AIR+MAX+ALPHA+TRAINER+6.avif " },
+  { name: "Pwr Nitro™ Sqd 2 Training Shoes", brand: "Puma", price: 569, image: "img3/PWR NITRO™ SQD 2 Training Shoes.avif " },
+  { name: "Pwr Hybrid Training Shoes", brand: "Puma", price: 379, image: "img3/PWR Hybrid Training Shoes.avif " },
+  { name: "Nike Mind 002", brand: "Nike", price: 659, image: "img3/NIKE MIND 002.avif " },
+  { name: "Nike Reax 8 Tr Mesh", brand: "Nike", price: 263, image: "img3/NIKE+REAX+8+TR+MESH.png " },
+  { name: "Nike Metcon 10", brand: "Nike", price: 689, image: "img3/M+NIKE+METCON+10.avif " },
+  { name: "Nike React Sfb Carbon", brand: "Nike", price: 719, image: "img3/NIKE+REACT+SFB+CARBON.avif " },
+  { name: "Nike Vomero Premium", brand: "Nike", price: 1029, image: "img4/W+NIKE+VOMERO+PREMIUM.avif " },
+  { name: "Nike Pegasus Premium", brand: "Nike", price: 995, image: "img4/W+NIKE+PEGASUS+PREMIUM.avif " },
+  { name: "W Air Zoom Pegasus 41", brand: "Nike", price: 609, image: "img4/W+AIR+ZOOM+PEGASUS+41.avif " },
+  { name: "W Nike Pegasus Premium ", brand: "Nike", price: 995, image: "img4/W NIKE PEGASUS PREMIUM.avif " },
+  { name: "Fresh Foam X More V5", brand: "New Balance", price: 529, image: "img4/Fresh Foam X More v5.webp " },
+  { name: "Fuel Cell Super Comp elite V5", brand: "New Balance", price: 999, image: "img4/FuelCell SuperComp Elitev5.webp " },
+  { name: "Fresh Foam X 880V15", brand: "New Balance", price: 669, image: "img4/Fresh Foam X 880v15.webp " },
+  { name: "Fresh Foam X 1080V14", brand: "New Balance", price: 629, image: "img4/Fresh Foam X 1080v14.webp " },
+  { name: "Mexico 66 Slip-On", brand: "Onitsuka Tiger", price: 680, image: "img4/MEXICO 66 SLIP-ON.webp " },
+  { name: "Mexico 66 Tgrs", brand: "Onitsuka Tiger", price: 750, image: "img4/MEXICO 66 TGRS pink.webp " },
+  { name: "Mexico 66 Sd", brand: "Onitsuka Tiger", price: 880, image: "img4/MEXIC0 66 SD.webp " },
+  { name: "Mexico 66", brand: "Onitsuka Tiger", price: 650, image: "img4/MEXICO 66.webp " },
+  { name: "327", brand: "New Balance", price: 479, image: "img4/327.webp " },
+  { name: "740", brand: "New Balance", price: 529, image: "img4/740.webp " },
+  { name: "Speedcat Lux Sneakers Unisex", brand: "Puma", price: 579, image: "img4/Speedcat-Lux-Sneakers-Unisex.avif " },
+  { name: "Speedcat Ballet Shoes Women", brand: "Puma", price: 379, image: "img4/Speedcat-Ballet-Shoes-Women.avif " },
+  { name: "Court Pro-2 Metalic Basketball Shoes Unisex", brand: "Asics", price: 369, image: "img4/Court Pro-2 Metallic Basketball Shoes Unisex.avif " },
+  { name: "The Dagger Basketball Shoes Unisex", brand: "Asics", price: 400, image: "img4/The Dagger Basketball Shoes Unisex.avif " },
+  { name: "All-Pro Nitro™ 2 Basketball Shoes Unisex", brand: "Asics", price: 649, image: "img4/All-Pro-NITRO™-2-Basketball-Shoes-Unisex.avif " },
+  { name: "All Pro Nitro™ Hoop Dreamz Basketball", brand: "Asics", price: 599, image: "img4/All-Pro-NITRO™-Hoops-Dreamz-Basketball-Shoes-Unisex.avif " },
+  { name: "Nike Precision VII", brand: "Nike", price: 295, image: "img4/NIKE PRECISION VII.avif " },
+  { name: "Nike Precision VII Easyon", brand: "Nike", price: 295, image: "img4/NIKE PRECISION VII EASYON.avif " },
+  { name: "Giannis Freak 7 “Shapeshift” Ep", brand: "Nike", price: 559, image: "img4/GIANNIS+FREAK+7+SE+EP.avif " },
+  { name: "A One Birthday Cake Ep", brand: "Nike", price: 509, image: "img4/A ONE EP.avif " },
+  { name: "Pwr Hybrid Training Shoes", brand: "Puma", price: 379, image: "img4/PWR Hybrid Training Shoes.avif " },
+  { name: "Pwr Nitro™ Sqd 2 Training Shoes Women Black", brand: "Puma", price: 569, image: "img4/PWR NITRO™ SQD 2 Training Shoes Women Black.avif " },
+  { name: "Pwr Hybrid Training Shoes Women", brand: "Puma", price: 379, image: "img4/PWR-Hybrid-Training-Shoes-Women.avif " },
+  { name: "Disperse Xt 4 Training Shoes", brand: "Puma", price: 309, image: "img4/Disperse-XT-4-Training-Shoes.avif " },
+  { name: "M Nike Metcon 10", brand: "Nike", price: 689, image: "img4/M NIKE METCON 10.avif " },
+  { name: "W Nike Air Bella 7", brand: "Nike", price: 409, image: "img4/W NIKE AIR ZOOM BELLA 7.avif " },
+  { name: "Nike Free Metcon 6", brand: "Nike", price: 559, image: "img4/W+NIKE+FREE+METCON+6.avif " },
+  { name: "Nike Free Metcon 6 Se", brand: "Nike", price: 609, image: "img4/W+NIKE+FREE+METCON+6+SE.avif " },
+  { name: "1000 Bungee Lace", brand: "New Balance", price: 359, image: "img5/1000 BUNGEE LACE.webp " },
+  { name: "1000 Bungee Lace Toddlers", brand: "New Balance", price: 359, image: "img5/100 BUNGEE LACE KIDS.webp " },
+  { name: "Fuel Cell 990V6 Hook and Loop", brand: "New Balance", price: 429, image: "img5/FuelCell 990v6 Hook and Loop.webp " },
+  { name: "Fuel Cell 990V6 Hook and Loop", brand: "New Balance", price: 429, image: "img5/FuelCell 990v6 Hook and Loop GREY.webp " },
+  { name: "Nike Vomero 18 White", brand: "Nike", price: 423, image: "img5/NIKE VOMERO 18 WHITE.avif " },
+  { name: "Nike Vomero 18 Pink", brand: "Nike", price: 529, image: "img5/NIKE VOMERO 18 PINK.avif " },
+  { name: "Nike Star Runner 5", brand: "Nike", price: 219, image: "img5/NIKE+STAR+RUNNER+5+(PS).avif " },
+  { name: "Nike Flex Runner 54", brand: "Nike", price: 205, image: "img5/FLEX+RUNNER+4+(GS).avif " },
+  { name: "327", brand: "New Balance", price: 269, image: "img5/327 BLUE.webp " },
+  { name: "530 Bungee Lace", brand: "New Balance", price: 349, image: "img5/1000 BUNGEE LACE.webp " },
+  { name: "Mexico 66 Kids Yellow", brand: "Onitsuka Tiger", price: 390, image: "img5/MEXICO 66 KIDS YELLOW.webp " },
+  { name: "Mexico 66 Kids White", brand: "Onitsuka Tiger", price: 390, image: "img5/MEXICO 66 KIDS WHITE.webp " },
+  { name: "Vomero 5", brand: "Nike", price: 409, image: "img5/VOMERO 5.avif " },
+  { name: "Nike P-6000", brand: "Nike", price: 379, image: "img5/NIKE P-6000.avif " },
+  { name: "Puma X Harry Potter Palermo Sneakers Youth", brand: "Puma", price: 160, image: "img5/PUMA x HARRY POTTER Palermo Sneakers Youth.avif " },
+  { name: "Smash 3.0 Sneakers Youth", brand: "Puma", price: 239, image: "img5/Smash 3.0 Sneakers Youth.avif " },
+  { name: "Kobe IX Low Em", brand: "Nike", price: 459, image: "img5/KOBE IX LOW EM.avif " },
+  { name: "Lebron XXIII", brand: "Nike", price: 649, image: "img5/LEBRON XXIII.avif " },
+  { name: "Ja 3", brand: "Nike", price: 369, image: "img5/JA.avif " },
+  { name: "Sabrina 3", brand: "Nike", price: 449, image: "img5/SABRINA 3.avif " },
+  { name: "Nike Team Hustle D12", brand: "Nike", price: 259, image: "img5/TEAM HUSTLE D 12 SE.avif " },
+  { name: "Nike G.T Cut 3 X Lego", brand: "Nike", price: 369, image: "img5/G.T. CUT 3 x LEGO COL.avif " },
+  { name: "Lebron Witness 9", brand: "Nike", price: 319, image: "img5/LEBRON WITNESS IX KC.avif " },
+  { name: "Nike Isofly", brand: "Nike", price: 279, image: "img5/NIKE ISOFLY SE.avif " },
+  { name: "Softride Enzo Nxt Trainers Youth", brand: "Puma", price: 289, image: "img5/Softride Enzo NXT Trainers Youth.avif " },
+  { name: "Flexfocus Modern Toddler", brand: "Puma", price: 1399, image: "img5/FlexFocus-Modern-Sneakers-Toddler.avif " },
+  { name: "Bella Sneakers Women", brand: "Puma", price: 329, image: "img6/bellasneakerswomen.avif " },
+  { name: "Caracal Trainers", brand: "Puma", price: 359, image: "img6/caracaltrainers.avif " },
+  { name: "Palermo Sneakers Unisex", brand: "Puma", price: 215, image: "img6/palermosneakersunisex.avif " },
+  { name: "Speedcat Og Sneakers Unisex", brand: "Puma", price: 549, image: "img6/Speedcat OG Sneakers Unisex.avif " },
+  { name: "Puma X Rose Speedcat Ballet Shoes Women", brand: "Puma", price: 429, image: "img6/puma x rose speedcat ballet shoes women.avif " },
+  { name: "Super Team Palais Artisan Sneakers Unisex", brand: "Puma", price: 549, image: "img6/Super Team Palais Artisan Sneakers Unisex.avif " },
+  { name: "Speedcat Piping Sneakers Women", brand: "Puma", price: 579, image: "img6/Speedcat Piping Snekers Women.avif " },
+  { name: "Speedcat Premium Unisex", brand: "Puma", price: 579, image: "img6/Speedcat Premiun Unisex.avif " },
+  { name: "Killshot 2 Ltr", brand: "Nike", price: 351, image: "img6/KILLSHOT 2 LTR.avif " },
+  { name: "Nike Air Pegasus Wave Se", brand: "Nike", price: 469, image: "img6/NIKE AIR PEGASUS WAVE SE.avif " },
+  { name: "Nike Gato Lv8", brand: "Nike", price: 509, image: "img6/NIKE GATO LV8.avif " },
+  { name: "W Nike Terra Manta", brand: "Nike", price: 311, image: "img6/W NIKE TERRA MANTA.avif " },
+  { name: "W Nike V2K Run", brand: "Nike", price: 377, image: "img6/W NIKE V2K RUN.avif " },
+  { name: "WMNS Nike T90", brand: "Nike", price: 305, image: "img6/WMNS NIKE T90.avif " },
+  { name: "Nike P-6000 Se Women", brand: "Nike", price: 489, image: "img6/W+NIKE+P-6000+SE.avif " },
+  { name: "Nike Dunk Low X Lego", brand: "Nike", price: 499, image: "img6/dunk low lego collection older shoes.avif " },
+  { name: "327", brand: "New Balance", price: 479, image: "img6/327.webp " },
+  { name: "740", brand: "New Balance", price: 529, image: "img6/740.webp " },
+  { name: "1906L", brand: "New Balance", price: 699, image: "img6/1906L.webp " },
+  { name: "9060", brand: "New Balance", price: 709, image: "img6/9060.webp " },
+  { name: "District Vision x New Balance SC Elite V5", brand: "New Balance", price: 1099, image: "img6/District Vision x New Balance SC Elite V5.webp " },
+  { name: "MT10", brand: "New Balance", price: 569, image: "img6/MT10.webp " },
+  { name: "574", brand: "New Balance", price: 449, image: "img6/574 Core (1).webp " },
+  { name: "FuelCell Rebel V5", brand: "New Balance", price: 649, image: "img6/Fuelcell Rebel v5.webp " },
+  { name: "Gel-Nyc", brand: "Asics", price: 579, image: "img6/GEL-NYC 2055 1.webp " },
+  { name: "Gel-Nyc Blue", brand: "Asics", price: 599, image: "img6/GEL-NYC 2055 2.webp " },
+  { name: "Gel-Nyc 2055 White", brand: "Asics", price: 579, image: "img6/GEL-NYC 2055 1.webp " },
+  { name: "Gel-Nyc 2055 Wine", brand: "Asics", price: 579, image: "img6/GEL-NYC 2055 2.webp " },
+  { name: "Gel-Styrax", brand: "Asics", price: 1049, image: "img6/GEL-STYRAX.webp " },
+  { name: "Gt-2160", brand: "Asics", price: 579, image: "img6/GT-2160.jpeg " },
+  { name: "Above The Clouds X Gel-Quantum 360", brand: "Asics", price: 899, image: "img6/ABOVE THE CLOUDS x GEL-QUANTUM 360.webp " },
+  { name: "Skyhand Og", brand: "Asics", price: 479, image: "img6/SKYHAND OG.webp " },
+  { name: "Mexico 66 Paraty", brand: "Onitsuka Tiger", price: 570, image: "img6/MEXICO 66 PARATY.webp " },
+  { name: "Mexico 66 Sabot", brand: "Onitsuka Tiger", price: 650, image: "img6/MEXICO 66 SABOT.webp " },
+  { name: "Mexico 66 Sd", brand: "Onitsuka Tiger", price: 880, image: "img6/MEXICO 66 SD.webp " },
+  { name: "Mexico 66 Slip-On", brand: "Onitsuka Tiger", price: 680, image: "img6/MEXICO 66 SLIP-ON.webp " },
+  { name: "Mexico 66 Tgrs", brand: "Onitsuka Tiger", price: 670, image: "img6/MEXICO 66 TGRS.webp " },
+  { name: "Tsunahiki Slip-On", brand: "Onitsuka Tiger", price: 700, image: "img6/TSUNAHIKI SLIP-ON.webp " },
+  { name: "Edr 78", brand: "Onitsuka Tiger", price: 700, image: "img6/EDR 78.webp " },
+  { name: "Tigcourt", brand: "Onitsuka Tiger", price: 1150, image: "img6/tigcourt.webp " },
+  { name: "Bella Lea Sneakers Women", brand: "Puma", price: 379, image: "img1/Bella Lea Sneakers Women.avif " },
+  { name: "Milenio Tech sneakers Unisex", brand: "Puma", price: 339, image: "img1/Milenio Tech Sneakers Unisex.avif " },
+  { name: "New Balance 204L", brand: "New Balance", price: 499, image: "img1/New Balance 204L.avif " },
+  { name: "Nike Air force 107 LV8", brand: "Nike", price: 539, image: "img1/Nike Air Force 1 '07 LV8.avif " },
+  { name: "Palermo Premium Sneakers Unisex", brand: "Puma", price: 469, image: "img1/Palermo Premium Sneakers Unisex.avif " },
+  { name: "Palermo sneakers Unisex", brand: "Puma", price: 429, image: "img1/Palermo Sneakers Unisex.avif " },
+  { name: "Speedcat Lux Ballet Sneakers Women", brand: "Puma", price: 399, image: "img1/Speedcat Lux Ballet Sneakers Women.avif " },
+  { name: "Speedcat Lux Sneakers Unisex", brand: "Puma", price: 579, image: "img1/Speedcat Lux Sneakers Unisex.avif " },
+  { name: "GEL-RESOLUTION X GS", brand: "Asics", price: 369, image: "img1/GEL-RESOLUTION X GS.webp " },
+  { name: "GAME FF", brand: "Asics", price: 369, image: "img1/GAME FF.webp " },
+  { name: "GEL-RESOLUTION X PINK", brand: "Asics", price: 629, image: "img1/GEL-RESOLUTION X.webp " },
+  { name: "COURT FF 3 WHITE", brand: "Asics", price: 559, image: "img1/COURT FF 3.avif " },
+  { name: "GAME FFF WHITE", brand: "Asics", price: 369, image: "img1/GAME FF WHITE.avif " },
+  { name: "GAME FF GREY", brand: "Asics", price: 369, image: "img1/GAME FF GREY.avif " },
+  { name: "GEL-CHALLENGER 15", brand: "Asics", price: 479, image: "img1/GEL-CHALLENGER 15.avif " },
+  { name: "GEL-DEDICATE 8", brand: "Asics", price: 329, image: "img1/GEL-DEDICATE 8.avif " },
+  { name: "GEL-RESOLUTION X", brand: "Asics", price: 629, image: "img1/GEL-RESOLUTION X.avif " },
+  { name: "GEL-RESOLUTION X NIGHT ENERGY", brand: "Asics", price: 659, image: "img1/GEL-RESOLUTION X NIGHT ENERGY.avif " },
+  { name: "SOLUTION SPEED FF 3", brand: "Asics", price: 579, image: "img1/SOLUTION SPEED FF 3.avif " },
+  { name: "SOLUTION SPEED FF 3 YELLOW", brand: "Asics", price: 579, image: "img1/SOLUTION SPEED FF 3 YELLOW.webp " },
+  { name: "NIKE PEGASUS PREMIUM", brand: "Nike", price: 995, image: "img1/NIKE PEGASUS PREMIUM.avif " },
+  { name: "NIKE VOMERO PREMIUM", brand: "Nike", price: 1029, image: "img1/NIKE VOMERO PREMIUM.avif " },
+  { name: "NIKE VOMERO PLUS", brand: "Nike", price: 759, image: "img1/NIKE VOMERO PLUS.avif " },
+  { name: "NIKE STRUCTURE 26", brand: "Nike", price: 609, image: "img1/NIKE STRUCTURE 26.avif " },
+  { name: "District Vision x New Balance SC Elite V5", brand: "New Balance", price: 1099, image: "img1/District Vision x New Balance SC Elite V5.webp " },
+  { name: "Fresh Foam X 1080v14", brand: "New Balance", price: 629, image: "img1/Fresh Foam X 1080v14.webp " },
+  { name: "NOVABLAST 5", brand: "Asics", price: 479, image: "img1/NOVABLAST 5.webp " },
+  { name: "NOOSA TRI 16", brand: "Asics", price: 440, image: "img1/NOOSA TRI 16.webp " },
+  { name: "MEXICO 66 SD PINK", brand: "Onitsuka Tiger", price: 880, image: "img1/MEXICO 66 SD PINK.webp " },
+  { name: "MEXICO 66 SD RED", brand: "Onitsuka Tiger", price: 880, image: "img1/MEXICO 66 SD RED.webp " },
+  { name: "MEXICO 66 TGRS BLACK", brand: "Onitsuka Tiger", price: 760, image: "img1/MEXICO 66 TGRS BLACK.webp " },
+  { name: "MEXICO 66 TGRS PINK", brand: "Onitsuka Tiger", price: 760, image: "img1/MEXICO 66 TGRS PINK.webp " },
+  { name: "SPEEDCAT LUX BALLET SNEAKERS WOMEN", brand: "Puma", price: 399, image: "img1/Speedcat Lux Ballet Sneakers Women.avif " },
+  { name: "SPEEDCAT LUX SNEAKERS UNISEX", brand: "Puma", price: 579, image: "img1/Speedcat Lux Sneakers Unisex.avif " },
+  { name: "SPEEDCAT BALLET SHOES WOMEN", brand: "Puma", price: 379, image: "img1/Speedcat-Ballet-Shoes-Women.avif " },
+  { name: "SPEEDCAT PREMIUM SNEAKERS UNISEX", brand: "Puma", price: 579, image: "img1/Speedcat-Premium-Sneakers-Unisex.avif " },
+  { name: "NIKE METCON 10", brand: "Nike", price: 689, image: "img1/M+NIKE+METCON+10.avif " },
+  { name: "NIKE FREE METCON 6", brand: "Nike", price: 559, image: "img1/W+NIKE+FREE+METCON+6.avif " },
+  { name: "NIKE FREE METCON 6 SE", brand: "Nike", price: 609, image: "img1/W+NIKE+FREE+METCON+6+SE.avif " },
+  { name: "NIKE MOTIVA", brand: "Nike", price: 489, image: "img1/WMNS+NIKE+MOTIVA.avif " },
+  { name: "PWR NITRO™ SQD 2 Training Shoes Women", brand: "Puma", price: 569, image: "img1/PWR-NITRO™-SQD-2-Training-Shoes-Women.avif " },
+  { name: "PWR Hybrid Training Shoes WHITE", brand: "Puma", price: 379, image: "img1/PWR-Hybrid-Training-Shoes.avif " },
+  { name: "PWR Hybrid Training Shoes Women ", brand: "Puma", price: 379, image: "img1/PWR-Hybrid-Training-Shoes-Women.avif " },
+  { name: " PWR Hybrid Training Shoes BLACK", brand: "Puma", price: 379, image: "img1/PWR-Hybrid-Training-Shoes (1).avif " },
+  { name: "GLIDE NOVA FF 4", brand: "Asics", price: 429, image: "img1/GLIDE NOVA FF 4.webp " },
+  { name: "GELHOOP V17 S", brand: "Asics", price: 499, image: "img1/GEL HOOP V 17 S.avif " },
+  { name: "GEL-FASTBLAZE", brand: "Asics", price: 399, image: "img1/GEL-FASTBLAZE.webp " },
+  { name: " JORDAN NOLA", brand: "Nike", price: 159, image: "img1/WMNS+JORDAN+NOLA+SLIDE.avif " },
+  { name: "NIKE OFFCOURT ADJUST", brand: "Nike", price: 179, image: "img1/NIKE+OFFCOURT+ADJUST+SLIDE.avif " },
+  { name: "NIKE CALM", brand: "Nike", price: 199, image: "img1/W+NIKE+CALM+SLIDE.avif " },
+  { name: "NIKE VICTORI ONE", brand: "Nike", price: 129, image: "mg1/W+NIKE+VICTORI+ONE+SLIDE.avif " },
+];
+
+// ===========================
+// CART SYSTEM
+// ===========================
+function addToCart(product) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Add the product
+  cart.push(product);
+
+  // Save back to localStorage
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert(product.name + " added to cart!");
+}
+
+// ===========================
+// SEARCH FUNCTION
+// ===========================
+let keyword = localStorage.getItem("searchKeyword")?.toLowerCase() || "";
+
+let filtered = products.filter(p => 
+  p.name.toLowerCase().includes(keyword) ||
+  p.brand.toLowerCase().includes(keyword)
+);
+
+let container = document.getElementById("results");
+
+// If no results
+if (filtered.length === 0) {
+  container.innerHTML = `
+    <p class="text-xl">No results found for "<b>${keyword}</b>".</p>
+  `;
+} else {
+  let html = "";
+
+  filtered.forEach(item => {
+    html += `
+      <div class="bg-white p-4 rounded shadow hover:scale-105 transition">
+        <img src="${item.image}" class="mb-4 rounded">
+        <h3 class="font-bold">${item.name}</h3>
+        <p class="text-yellow-600 font-semibold mb-2">RM ${item.price}</p>
+
+        <!-- ADD TO CART BUTTON -->
+        <button 
+          onclick='addToCart(${JSON.stringify(item)})'
+          class="bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700 transition">
+          Add to Cart
+        </button>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

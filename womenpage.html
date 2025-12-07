@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SoléAA — Women Collection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Active filter button style */
+    .active-filter {
+      background-color: #000 !important;
+      color: #facc15 !important; /* tailwind yellow-400 */
+    }
+  </style>
+</head>
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+  <!-- NAVBAR -->
+  <header class="bg-black py-4">
+    <div class="container mx-auto flex items-center justify-between px-6">
+      <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</div>
+
+      <nav class="hidden md:flex gap-8 text-white font-semibold">
+        <a href="index.html" class="hover:text-yellow-400">Home</a>
+        <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+        <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+        <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+        <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+        <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+        <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+        <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+        <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-6 text-white">
+      <input id="searchBar" type="text" placeholder="Search…" class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+    <button onclick="searchProduct()" class="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+    Search
+    </button>  
+      <a href="login.html" class="hover:text-yellow-400">Login</a>
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+      </div>
+    </div>
+  </header>
+
+<!-- ===================== HERO ===================== -->
+<section class="w-full h-[300px] bg-black flex items-center justify-center text-yellow-400">
+  <h1 class="text-6xl font-extrabold tracking-tight">WOMEN COLLECTION</h1>
+</section>
+
+<!-- ===================== PAGE INTRO ===================== -->
+  <section class="container mx-auto px-6 py-10">
+    <h2 class="text-3xl font-bold mb-4">Shop Women Shoes</h2>
+    <p class="text-gray-600 mb-6">Discover curated running, lifestyle, basketball and training shoes.</p>
+
+<!-- ===================== FILTERS ===================== -->
+    <div class="flex flex-wrap gap-4 mb-10">
+
+      <button class="filter-btn bg-black text-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition active-filter"
+              onclick="filterCategory('all', event)">All</button>
+
+      <button class="filter-btn bg-black text-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition"
+              onclick="filterCategory('running', event)">Running</button>
+
+      <button class="filter-btn bg-black text-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition"
+              onclick="filterCategory('lifestyle', event)">Lifestyle</button>
+
+      <button class="filter-btn bg-black text-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition"
+              onclick="filterCategory('basketball', event)">Basketball</button>
+
+      <button class="filter-btn bg-black text-yellow-400 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-black transition"
+              onclick="filterCategory('training', event)">Gym/Training</button>
+    </div>
+
+<!-- ===================== PRODUCT SECTION ===================== -->
+    <div id="womenGrid" class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+      <!-- Running -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE VOMERO PREMIUM', 1029, 'img4/W+NIKE+VOMERO+PREMIUM.avif')">
+     <img src="img4/W+NIKE+VOMERO+PREMIUM.avif" />
+     <h3 class="font-semibold">NIKE VOMERO PREMIUM</h3>
+     <p class="font-bold mt-2">RM 1,029</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('NIKE PEGASUS PREMIUM', 995, 'img4/W+NIKE+PEGASUS+PREMIUM.avif')">
+     <img src="img4/W+NIKE+PEGASUS+PREMIUM.avif" />
+     <h3 class="font-semibold">NIKE PEGASUS PREMIUM</h3>
+     <p class="font-bold mt-2">RM 995</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('W AIR ZOOM PEGAGUS 41', 609, 'img4/W+AIR+ZOOM+PEGASUS+41.avif')">
+     <img src="img4/W+AIR+ZOOM+PEGASUS+41.avif" />
+     <h3 class="font-semibold">W AIR ZOOM PEGAGUS 41</h3>
+     <p class="font-bold mt-2">RM 609</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('W NIKE PEGAGUS PREMIUM', 995, 'img4/W NIKE PEGASUS PREMIUM.avif')">
+     <img src="img4/W NIKE PEGASUS PREMIUM.avif" />
+     <h3 class="font-semibold">W NIKE PEGAGUS PREMIUM</h3>
+     <p class="font-bold mt-2">RM 995</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('Fresh Foam X More V5', 529, 'img4/Fresh Foam X More v5.webp')">
+     <img src="img4/Fresh Foam X More v5.webp" />
+     <h3 class="font-semibold">FRESH FOAM X MORE V5</h3>
+     <p class="font-bold mt-2">RM 529</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('FuelCell Super Comp Elite V5', 999, 'img4/FuelCell SuperComp Elitev5.webp')">
+     <img src="img4/FuelCell SuperComp Elitev5.webp" />
+     <h3 class="font-semibold">FUEL CELL SUPER COMP ELITE V5</h3>
+     <p class="font-bold mt-2">RM 999</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('FRESH FOAM X 880V15', 669, 'img/FuelCell SuperComp Elitev5.avif')">
+     <img src="img4/Fresh Foam X 880v15.webp" />
+     <h3 class="font-semibold">FRESH FOAM X 880V15</h3>
+     <p class="font-bold mt-2">RM 669</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="running"
+     onclick="openProduct('FRESH FOAM X 1080V14', 629, 'img4/Fresh Foam X 1080v14.webp')">
+     <img src="img4/Fresh Foam X 1080v14.webp" />
+     <h3 class="font-semibold">FRESH FOAM X 1080V14</h3>
+     <p class="font-bold mt-2">RM 629</p>
+</div>
+
+      <!-- Lifestyle -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 SLIP-ON', 680, 'img4/MEXICO 66 SLIP-ON.webp')">
+     <img src="img4/MEXICO 66 SLIP-ON.webp" />
+     <h3 class="font-semibold">MEXICO 66 SLIP-ON</h3>
+     <p class="font-bold mt-2">RM 680</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 TGRS', 750, 'img4/MEXICO 66 TGRS pink.webp')">
+     <img src="img4/MEXICO 66 TGRS pink.webp" />
+     <h3 class="font-semibold">MEXICO 66 TGRS</h3>
+     <p class="font-bold mt-2">RM 750</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66 SD', 880, 'img4/MEXIC0 66 SD.webp')">
+     <img src="img4/MEXIC0 66 SD.webp" />
+     <h3 class="font-semibold">MEXICO 66 SD</h3>
+     <p class="font-bold mt-2">RM 880</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('MEXICO 66', 650, 'img4/MEXICO 66.webp')">
+     <img src="img4/MEXICO 66.webp" />
+     <h3 class="font-semibold">MEXICO 66</h3>
+     <p class="font-bold mt-2">RM 650</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('327', 479, 'img4/327.webp')">
+     <img src="img4/327.webp" />
+     <h3 class="font-semibold">327</h3>
+     <p class="font-bold mt-2">RM 479</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('740', 529, 'img4/740.webp')">
+     <img src="img4/740.webp" />
+     <h3 class="font-semibold">740</h3>
+     <p class="font-bold mt-2">RM 529</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('SPEEDCAT LUX SNEAKERS UNISEX', 579, 'img4/Speedcat-Lux-Sneakers-Unisex.avif')">
+     <img src="img4/Speedcat-Lux-Sneakers-Unisex.avif" />
+     <h3 class="font-semibold">SPEEDCAT LUX SNEAKERS UNISEX</h3>
+     <p class="font-bold mt-2">RM 579</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="lifestyle"
+     onclick="openProduct('Speedcat Ballet Shoes Women', 379, 'img4/Speedcat-Ballet-Shoes-Women.avif')">
+     <img src="img4/Speedcat-Ballet-Shoes-Women.avif" />
+     <h3 class="font-semibold">SPEEDCAT BALLET SHOES WOMEN</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+      <!-- Basketball -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('Court Pro-2 Metalic Basketball Shoes Unisex', 369, 'img/Court Pro-2 Metallic Basketball Shoes Unisex.avif')">
+     <img src="img4/Court Pro-2 Metallic Basketball Shoes Unisex.avif" />
+     <h3 class="font-semibold">COURT PRO-2 METALIC BASKETBALL SHOES UNISEX</h3>
+     <p class="font-bold mt-2">RM 369</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('The Dagger Basketball Shoes Unisex', 400, 'img/The Dagger Basketball Shoes Unisex.avif')">
+     <img src="img4/The Dagger Basketball Shoes Unisex.avif" />
+     <h3 class="font-semibold">THE DAGGER BASKETBALL SHOES UNISEX</h3>
+     <p class="font-bold mt-2">RM 400</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('ALL-PRO NITRO™ 2 BASKETBALL SHOES UNISEX', 649, 'img4/All-Pro-NITRO™-2-Basketball-Shoes-Unisex.avif')">
+     <img src="img4/All-Pro-NITRO™-2-Basketball-Shoes-Unisex.avif" />
+     <h3 class="font-semibold">ALL-PRO NITRO™ 2 BASKETBALL SHOES UNISEX</h3>
+     <p class="font-bold mt-2">RM 649</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('The Dagger Basketball Shoes Unisex', 599, 'img4/All-Pro-NITRO™-Hoops-Dreamz-Basketball-Shoes-Unisex.avif')">
+     <img src="img4/All-Pro-NITRO™-Hoops-Dreamz-Basketball-Shoes-Unisex.avif" />
+     <h3 class="font-semibold">ALL PRO NITRO™ HOOP DREAMZ BASKETBALL</h3>
+     <p class="font-bold mt-2">RM 599</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('NIKE PRECISION VII', 295, 'img/NIKE PRECISION VII.avif')">
+     <img src="img4/NIKE PRECISION VII.avif" />
+     <h3 class="font-semibold">NIKE PRECISION VII</h3>
+     <p class="font-bold mt-2">RM 295</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('NIKE PRECISION VII EASYON', 295, 'img/NIKE PRECISION VII EASYON.avif')">
+     <img src="img4/NIKE PRECISION VII EASYON.avif" />
+     <h3 class="font-semibold">NIKE PRECISION VII EASYON</h3>
+     <p class="font-bold mt-2">RM 295</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('GIANNIS FREAK 7 SHAPESHIFT EP', 559, 'img/NIKE PRECISION VII EASYON.avif')">
+     <img src="img4/GIANNIS+FREAK+7+SE+EP.avif" />
+     <h3 class="font-semibold">GIANNIS FREAK 7 "SHAPESHIFT" EP</h3>
+     <p class="font-bold mt-2">RM 559</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="basketball"
+     onclick="openProduct('A ONE BIRTHDAY CAKE EP', 509, 'img4/A ONE EP.avif')">
+     <img src="img4/A ONE EP.avif" />
+     <h3 class="font-semibold">A ONE BIRTHDAY CAKE EP</h3>
+     <p class="font-bold mt-2">RM 509</p>
+</div>
+
+      <!-- Training / Gym -->
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('PWR Hybrid Training Shoes', 379, 'img/PWR Hybrid Training Shoes.avif')">
+     <img src="img4/PWR Hybrid Training Shoes.avif" />
+     <h3 class="font-semibold">PWR HYBRID TRAINING SHOES</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('PWR NITRO™ SQD 2 Training Shoes Women Black', 569, 'img/PWR NITRO™ SQD 2 Training Shoes Women Black.avif')">
+     <img src="img4/PWR NITRO™ SQD 2 Training Shoes Women Black.avif" />
+     <h3 class="font-semibold">PWR NITRO™ SQD 2 TRAINING SHOES WOMEN BLACK</h3>
+     <p class="font-bold mt-2">RM 569</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('PWR HYBRID TRAINING SHOES WOMEN', 379, 'img4/PWR-Hybrid-Training-Shoes-Women.avif')">
+     <img src="img4/PWR-Hybrid-Training-Shoes-Women.avif" />
+     <h3 class="font-semibold">PWR HYBRID TRAINING SHOES WOMEN</h3>
+     <p class="font-bold mt-2">RM 379</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('DISPERSE XT 4 TRAINING SHOES', 309, 'img4/Disperse-XT-4-Training-Shoes.avif')">
+     <img src="img4/Disperse-XT-4-Training-Shoes.avif" />
+     <h3 class="font-semibold">DISPERSE XT 4 TRAINING SHOES</h3>
+     <p class="font-bold mt-2">RM 309</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('M NIKE METCON 10', 689, 'img/M NIKE METCON 10.avif')">
+     <img src="img4/M NIKE METCON 10.avif" />
+     <h3 class="font-semibold">M NIKE METCON 10</h3>
+     <p class="font-bold mt-2">RM 689</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('W NIKE AIR BELLA 7', 409, 'img/W NIKE AIR ZOOM BELLA 7.avif')">
+     <img src="img4/W NIKE AIR ZOOM BELLA 7.avif" />
+     <h3 class="font-semibold">W NIKE AIR BELLA 7</h3>
+     <p class="font-bold mt-2">RM 409</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('NIKE FREE METCON 6', 559, 'img4/W+NIKE+FREE+METCON+6.avif')">
+     <img src="img4/W+NIKE+FREE+METCON+6.avif" />
+     <h3 class="font-semibold">NIKE FREE METCON 6</h3>
+     <p class="font-bold mt-2">RM 559</p>
+</div>
+
+<div class="category-card bg-white p-4 shadow rounded-lg cursor-pointer"
+     data-category="training"
+     onclick="openProduct('NIKE FREE METCON 6 SE', 609, 'img4/W+NIKE+FREE+METCON+6+SE.avif')">
+     <img src="img4/W+NIKE+FREE+METCON+6+SE.avif" />
+     <h3 class="font-semibold">NIKE FREE METCON 6 SE</h3>
+     <p class="font-bold mt-2">RM 609</p>
+</div>
+
+    </div> 
+
+  </section>
+
+<!-- ====================== FOOTER ====================== -->
+  <footer class="bg-black text-gray-300 text-center py-10 mt-10">
+    © 2025 SoléAA. All rights reserved.
+  </footer>
+
+  <!-- JS: cart/search functions (kept minimal) + filter logic -->
+  <script>
+    // small search demo (you already have a script file — adapt if needed)
+    function searchProducts() {
+      const q = document.getElementById('searchInput')?.value?.trim().toLowerCase() || '';
+      if (!q) { alert('Type a search keyword first'); return; }
+      alert('Search for: ' + q + ' (demo)');
+    }
+
+    // FILTER function used by buttons above
+    function filterCategory(category, ev) {
+      // remove active highlight
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active-filter'));
+      if (ev && ev.currentTarget) {
+        ev.currentTarget.classList.add('active-filter');
+      } else if (ev && ev.target) {
+        ev.target.classList.add('active-filter');
+      }
+
+      // show / hide grid items
+      document.querySelectorAll('.category-card').forEach(card => {
+        const cat = card.dataset.category;
+        if (category === 'all' || cat === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      // scroll to products for better UX on mobile
+      const grid = document.getElementById('womenGrid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // set initial state: show all and mark first button as active
+    window.addEventListener('load', () => {
+      const first = document.querySelector('.filter-btn');
+      if (first) first.classList.add('active-filter');
+    });
+  </script>
+
+<!-- PRODUCT POPUP MODAL -->
+<div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white p-6 w-96 rounded-lg shadow-lg">
+    <img id="modalImage" class="w-full h-48 object-contain mb-4">
+
+    <h2 id="modalName" class="text-xl font-bold mb-2"></h2>
+    <p id="modalPrice" class="text-lg font-semibold mb-4 text-yellow-600"></p>
+
+    <label class="block mb-2 font-semibold">Select Size</label>
+    <select id="modalSize" class="w-full border p-2 rounded mb-4">
+      <option value="">Choose Size</option>
+      <option>US 5</option>
+      <option>US 6</option>
+      <option>US 7</option>
+      <option>US 8</option>
+      <option>US 9</option>
+    </select>
+
+    <button onclick="addModalToCart()" 
+            class="w-full bg-black text-yellow-400 py-2 rounded font-semibold hover:bg-yellow-400 hover:text-black transition">
+      Add to Cart
+    </button>
+
+    <button onclick="closeModal()" 
+            class="w-full mt-3 bg-gray-300 text-black py-2 rounded font-semibold hover:bg-gray-400 transition">
+      Cancel
+    </button>
+  </div>
+</div>
+
+<script>
+let selectedProduct = {};
+
+function openProduct(name, price, image) {
+  selectedProduct = { name, price, image };
+
+  document.getElementById('modalName').innerText = name;
+  document.getElementById('modalPrice').innerText = 'RM ' + price;
+  document.getElementById('modalImage').src = image;
+
+  document.getElementById('productModal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.add('hidden');
+}
+
+function addModalToCart() {
+  const size = document.getElementById('modalSize').value;
+
+  if (!size) {
+    alert('Please select a size!');
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  cart.push({
+    name: selectedProduct.name,
+    price: selectedProduct.price,
+    size: size,
+    image: selectedProduct.image,
+    qty: 1
+  });
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  alert('Added to cart!');
+  closeModal();
+}
+</script>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+<script>
+function searchProduct() {
+  let input = document.getElementById("searchBar").value.trim().toLowerCase();
+
+  if (input === "") {
+    alert("Please enter a product name or brand.");
+    return;
+  }
+
+  localStorage.setItem("searchKeyword", input);
+
+  window.location.href = "search.html";
+}
+</script>
+
+<script>
+document.getElementById("searchBar").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    searchProduct();
+  }
+});
+</script>
+
+</body>
+</html>

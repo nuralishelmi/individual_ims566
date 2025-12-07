@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register – SoléAA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+<!-- NAVBAR (Option A) -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <a href="index.html" class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</a>
+
+    <nav class="hidden md:flex gap-6 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <input id="searchInputNav" type="text" placeholder="Search..." class="hidden md:block px-3 py-1 rounded-full" />
+      <a href="login.html" class="text-white hover:text-yellow-400">Login</a>
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- REGISTER FORM -->
+<main class="min-h-screen flex items-center justify-center py-12 px-6">
+  <div class="w-full max-w-md bg-white p-8 rounded-xl shadow border border-yellow-300">
+    <h1 class="text-2xl font-bold mb-4 text-center">Create Account</h1>
+
+    <form id="registerForm" class="space-y-4">
+      <div>
+        <label class="block font-medium mb-1">Full name</label>
+        <input id="name" required class="w-full border px-3 py-2 rounded" />
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Email</label>
+        <input id="email" type="email" required class="w-full border px-3 py-2 rounded" />
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Password</label>
+        <input id="password" type="password" required class="w-full border px-3 py-2 rounded" />
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Confirm password</label>
+        <input id="confirmPassword" type="password" required class="w-full border px-3 py-2 rounded" />
+      </div>
+
+      <button type="submit" class="w-full bg-black text-white py-2 rounded hover:bg-yellow-400 hover:text-black transition">Register</button>
+
+      <p class="text-center text-sm">Already have an account? <a href="login.html" class="text-blue-600">Login</a></p>
+    </form>
+  </div>
+</main>
+
+<script>
+// Register handler
+document.getElementById('registerForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirmPassword').value;
+
+  if (!name || !email || !password) { alert('Please fill all fields'); return; }
+  if (password !== confirm) { alert('Passwords do not match'); return; }
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
+  if (users.some(u => u.email === email)) {
+    alert('This email is already registered');
+    return;
+  }
+
+  users.push({ name, email, password });
+  localStorage.setItem('users', JSON.stringify(users));
+
+  // 🔥 INIT DATA UNTUK USER BARU
+  localStorage.setItem("orders", JSON.stringify([]));
+  localStorage.setItem("cart", JSON.stringify([]));
+
+  alert('Registration successful — please login');
+  window.location.href = 'login.html';
+});
+
+
+// display cart count if any
+function updateCartCount() {
+  const c = JSON.parse(localStorage.getItem('cart')) || [];
+  const count = c.reduce((s,i)=>s + (i.quantity || i.qty || 1), 0);
+  document.getElementById('cartCount').innerText = count;
+}
+updateCartCount();
+</script>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>

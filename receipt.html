@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receipt – SoléAA</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+
+<!-- NAVBAR -->
+ <header class="bg-black py-4">
+  <div class="container mx-auto flex justify-between items-center px-6">
+    <div class="text-3xl font-extrabold text-yellow-400">SoléAA</div>
+    <nav class="text-white hidden md:flex gap-8">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- RECEIPT SECTION -->
+<section class="container mx-auto px-6 py-10 max-w-3xl bg-white shadow-xl rounded-xl border border-yellow-400 mt-10">
+
+  <h1 class="text-4xl font-bold text-center mb-4">Payment Receipt</h1>
+  <p class="text-center text-gray-600 mb-6">Thank you for shopping with SoléAA!</p>
+
+  <div id="receiptContent">
+
+    <!-- Receipt content loaded by JS -->
+
+  </div>
+
+  <div class="text-center mt-8">
+    <button onclick="window.print()" 
+            class="px-6 py-3 bg-black text-white rounded-lg hover:bg-yellow-500 hover:text-black transition">
+      Download / Print Receipt
+    </button>
+  </div>
+
+</section>
+
+<footer class="bg-black text-gray-300 text-center py-10 mt-12">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+<script>
+// LOAD RECEIPT DATA
+window.onload = function () {
+  let receipt = JSON.parse(localStorage.getItem("latestReceipt"));
+  let container = document.getElementById("receiptContent");
+
+  if (!receipt) {
+    container.innerHTML = `<p class='text-center'>No receipt found.</p>`;
+    return;
+  }
+
+  let itemsHTML = receipt.items.map(item => `
+    <div class="flex justify-between border-b py-2">
+      <span>${item.name} (x${item.quantity || 1})</span>
+      <span>RM ${(item.price * (item.quantity || 1)).toFixed(2)}</span>
+    </div>
+  `).join("");
+
+  container.innerHTML = `
+    <div class="mb-6">
+      <p><b>Receipt ID:</b> ${receipt.id}</p>
+      <p><b>Date:</b> ${receipt.date}</p>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold mb-2">Customer Information</h3>
+      <p><b>Name:</b> ${receipt.name}</p>
+      <p><b>Address:</b> ${receipt.address}</p>
+      <p><b>Phone:</b> ${receipt.phone}</p>
+      <p><b>Payment Method:</b> ${receipt.paymentMethod}</p>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold mb-2">Order Items</h3>
+      ${itemsHTML}
+    </div>
+
+    <div class="text-xl font-bold text-right mt-4">
+      Total Paid: RM ${receipt.total.toFixed(2)}
+    </div>
+  `;
+};
+</script>
+
+</body>
+</html>

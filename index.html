@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoléAA – Cyber Week</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fef3dc] text-gray-900 font-sans">
+
+<!-- ===============================================================
+     TOP NAVBAR (About Us + Men + Women + Kids + Collections + Dashboard + New Arrivals)
+=============================================================== -->
+<header class="bg-black py-4">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <!-- BRAND -->
+    <div class="text-3xl font-extrabold text-yellow-400 tracking-wide">SoléAA</div>
+
+    <!-- LINKS -->
+    <nav class="hidden md:flex gap-8 text-white font-semibold">
+      <a href="index.html" class="hover:text-yellow-400">Home</a>
+      <a href="newarrivals.html" class="hover:text-yellow-400">New Arrivals</a>
+      <a href="menpage.html" class="hover:text-yellow-400">Men</a>
+      <a href="womenpage.html" class="hover:text-yellow-400">Women</a>
+      <a href="kidspage.html" class="hover:text-yellow-400">Kids</a>
+      <a href="collections.html" class="hover:text-yellow-400">Collections</a>
+      <a href="categories.html" class="hover:text-yellow-400">Categories</a>
+      <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+      <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+    </nav>
+
+    <!-- SEARCH + LOGIN + CART -->
+    <div class="flex items-center gap-6 text-white">
+        <input id="searchBar" type="text" placeholder="Search…" class="px-4 py-1 rounded-full bg-white text-black hidden md:block">
+
+        <button onclick="searchProduct()" class="bg-yellow-400 text-black px-4 py-1 rounded-full font-semibold hover:bg-white hover:text-black transition">
+    Search
+    </button>
+    <a href="login.html" class="hover:text-yellow-400">Login</a>
+
+
+      <a href="cart.html" class="relative hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h18v18H3V3z" />
+      </svg>
+      <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===============================================================
+     CYBER WEEK HERO SECTION
+=============================================================== -->
+<section class="w-full flex flex-col md:flex-row">
+
+  <!-- LEFT SIDE (Black BG, Yellow text) -->
+  <div class="w-full md:w-1/2 bg-black text-yellow-400 flex items-center justify-center relative p-10">
+    <h1 class="text-7xl md:text-8xl font-extrabold leading-none tracking-tight">
+      CYBER<br> WEEK
+    </h1>
+
+    
+    <h2 class="absolute bottom-10 left-10 w-[420px] drop-shadow-2xl"></h2>
+  </div>
+
+  <!-- RIGHT SIDE (Yellow BG) -->
+  <div class="w-full md:w-1/2 bg-yellow-400 flex flex-col justify-center p-10">
+    <p class="text-black font-bold text-sm tracking-wider mb-2">LIMITED TIME ONLY</p>
+
+    <h2 class="text-5xl font-extrabold leading-tight">
+      BUY 2 GET<br> EXTRA 15% OFF
+    </h2>
+
+    <p class="mt-3 text-black text-xl">Use Code: <b>CYBERWEEK15</b></p>
+
+    <button onclick="window.location.href='collections.html'"
+            class="mt-8 border border-black bg-white px-6 py-3 rounded-lg font-semibold w-fit hover:bg-black hover:text-yellow-400 transition">
+      Shop Cyber Week
+    </button>
+  </div>
+</section>
+
+<!-- ===============================================================
+     SHOP BY COLLECTION (BRANDS)
+=============================================================== -->
+<section class="container mx-auto px-6 py-16" id="collections">
+  <h2 class="text-3xl font-bold mb-6">Shop by Collections</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+
+    <!-- PUMA -->
+    <div onclick="goToBrand('puma')" 
+         class="bg-white shadow rounded-lg p-6 text-center cursor-pointer hover:bg-yellow-100 transition">
+      <img src="img/logopuma.png" class="h-16 mx-auto mb-3">
+      <p class="font-semibold">Puma</p>
+    </div>
+
+    <!-- NIKE -->
+    <div onclick="goToBrand('nike')" 
+         class="bg-white shadow rounded-lg p-6 text-center cursor-pointer hover:bg-yellow-100 transition">
+      <img src="img/logonike.png" class="h-16 mx-auto mb-3">
+      <p class="font-semibold">Nike</p>
+    </div>
+
+    <!-- NEW BALANCE -->
+    <div onclick="goToBrand('newbalance')" 
+         class="bg-white shadow rounded-lg p-6 text-center cursor-pointer hover:bg-yellow-100 transition">
+      <img src="img/logonb.png" class="h-16 mx-auto mb-3">
+      <p class="font-semibold">New Balance</p>
+    </div>
+
+    <!-- ASICS -->
+    <div onclick="goToBrand('asics')" 
+         class="bg-white shadow rounded-lg p-6 text-center cursor-pointer hover:bg-yellow-100 transition">
+      <img src="img/logoasics.png" class="h-16 mx-auto mb-3">
+      <p class="font-semibold">Asics</p>
+    </div>
+
+    <!-- ONITSUKA TIGER -->
+    <div onclick="goToBrand('onitsuka')" 
+         class="bg-white shadow rounded-lg p-6 text-center cursor-pointer hover:bg-yellow-100 transition">
+      <img src="img/logoonitsuka.png" class="h-16 mx-auto mb-3">
+      <p class="font-semibold">Onitsuka Tiger</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===============================================================
+     NEW ARRIVALS
+=============================================================== -->
+<section class="container mx-auto px-6 py-16" id="new-arrivals">
+  <h2 class="text-3xl font-bold mb-4">New Arrivals</h2>
+  <p class="text-gray-600 mb-8">Our newly launched shoes collection.</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+    <!-- Product card -->
+    <div onclick="goToNewArrivals()" 
+         class="bg-white rounded-lg shadow p-4 cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/Speedcatluxballetsneakerswomen" class="mb-4">
+      <h3 class="font-semibold mb-1">Speedcat Lux Ballet Sneakers Women</h3>
+      <p class="font-bold">RM 399</p>
+    </div>
+
+    <div onclick="goToNewArrivals()" 
+         class="bg-white rounded-lg shadow p-4 cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/530 MEN.webp" class="mb-4">
+      <h4 class="font-semibold mb-1">NB 530</h4>
+      <p class="font-bold">RM 499</p>
+    </div>
+
+    <div onclick="goToNewArrivals()" 
+         class="bg-white rounded-lg shadow p-4 cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/kimhekimxgel.jpeg" class="mb-4">
+      <h5 class="font-semibold mb-1">KIMHEKIM x GEL-NIMBUS 10.1</h5>
+      <p class="font-bold">RM 779</p>
+    </div>
+
+    <div onclick="goToNewArrivals()" 
+         class="bg-white rounded-lg shadow p-4 cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/tokuten.webp" class="mb-4">
+      <h6 class="font-semibold mb-1">Tokuten</h6>
+      <p class="font-bold">RM 680</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===============================================================
+     CATEGORIES SECTION
+=============================================================== -->
+<section class="container mx-auto px-6 py-16" id="categories">
+  <h2 class="text-3xl font-bold mb-4">Shop by Categories</h2>
+  <p class="text-gray-600 mb-8">Find shoes based on your lifestyle.</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+    <!-- Running -->
+    <div onclick="goToCategories()" 
+         class="bg-white p-6 shadow rounded-xl cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/running.jpeg" class="rounded mb-4">
+      <h3 class="text-lg font-semibold">Running</h3>
+    </div>
+
+    <!-- Tennis -->
+    <div onclick="goToCategories()" 
+         class="bg-white p-6 shadow rounded-xl cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/tennis.jpeg" class="rounded mb-4">
+      <h3 class="text-lg font-semibold">Tennis</h3>
+    </div>
+
+    <!-- Basketball -->
+    <div onclick="goToCategories()" 
+         class="bg-white p-6 shadow rounded-xl cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/basketball.jpeg" class="rounded mb-4">
+      <h3 class="text-lg font-semibold">Basketball</h3>
+    </div>
+
+    <!-- Gym / Training -->
+    <div onclick="goToCategories()" 
+         class="bg-white p-6 shadow rounded-xl cursor-pointer hover:shadow-lg hover:scale-105 transition">
+      <img src="img/running.jpeg" class="rounded mb-4">
+      <h3 class="text-lg font-semibold">Gym & Training</h3>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="bg-black text-gray-300 text-center py-10 mt-10">
+  © 2025 SoléAA. All rights reserved.
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+  function goToBrand(brand) {
+    window.location.href = "collections.html?brand=" + brand;
+  }
+</script>
+
+<script>
+  function goToNewArrivals() {
+    window.location.href = "newarrivals.html";
+  }
+</script>
+
+<script>
+  function goToCategories() {
+    window.location.href = "categories.html";
+  }
+</script>
+
+<script>
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let totalItems = 0;
+
+  cart.forEach(item => {
+    totalItems += item.quantity ? item.quantity : 1;
+  });
+
+  let badge = document.getElementById("cartCount");
+  if (badge) {
+    badge.textContent = totalItems;
+  }
+}
+
+updateCartCount();
+</script>
+
+<script>
+function searchProduct() {
+  let input = document.getElementById("searchBar").value.trim().toLowerCase();
+
+  if (input === "") {
+    alert("Please enter a product name or brand.");
+    return;
+  }
+
+
+  localStorage.setItem("searchKeyword", input);
+  window.location.href = "search.html";
+}
+</script>
+
+<script>
+document.getElementById("searchBar").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    searchProduct();
+  }
+});
+</script>
+
+</body>
+</html>
+
